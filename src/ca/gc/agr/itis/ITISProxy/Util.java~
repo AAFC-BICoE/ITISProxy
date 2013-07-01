@@ -1,0 +1,7 @@
+
+package ca.gc.agr.itis.ITISProxy;
+
+import ca.gc.agr.itis.ITISModel.*;
+import java.util.List;
+import java.util.Map;
+
