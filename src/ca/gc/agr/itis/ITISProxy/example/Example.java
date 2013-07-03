@@ -9,7 +9,11 @@ import java.util.ArrayList;
 
 
 public final class Example{
-	static final String[] taxaTsns = MockUtil.hierarchyToCaloplacaAlbovariegata;
+	//static final String[] taxaTsns = MockUtil.hierarchyToCaloplacaAlbovariegata;
+
+	static final String[] taxaTsns = {MockUtil.fungiTsn, MockUtil.ascomycotaTsn, MockUtil.pezizomycotinaTsn, 
+	                             MockUtil.lecanoromycetesTsn, MockUtil.lecanoralesTsn, MockUtil.teloschistineaeTsn, 
+	                             MockUtil.teloschistaceaeTsn, MockUtil.caloplacaTsn, MockUtil.caloplacaAlbovariegataTsn};
 
 	public static void main(String [ ] args){
 		printKingdoms();
@@ -58,7 +62,7 @@ public final class Example{
 	}
 
 	static void start(String s){
-		System.out.println("\n\nSTART " + s + br + "\n");
+		System.out.println("\n\nSTART " + s + br);
 	}
 
 

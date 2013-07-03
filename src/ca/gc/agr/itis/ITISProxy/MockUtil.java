@@ -61,7 +61,7 @@ public class MockUtil{
 	static final public String teloschistineaeTsn = "191608";
 	static final public String teloschistaceaeTsn = "14034";
 	static final public String caloplacaTsn = "14035";
-	static final public String caloplacaAlbovariegataTsn = "191680";
+	static final public String caloplacaAlbovariegataTsn = "191636";
 
 	static public String[] hierarchyToCaloplacaAlbovariegata = {fungiTsn, ascomycotaTsn, pezizomycotinaTsn, 
 	                                                         lecanoromycetesTsn, lecanoralesTsn, teloschistineaeTsn, 
@@ -76,7 +76,10 @@ public class MockUtil{
 	static private Map<String,String> tsnToGlobalSpeciesMap;
 	static private Map<String,String> tsnToCompletenessMap;
 	static private Map<String,String> tsnToCurrencyMap;
+	static private Map<String,String> tsnToAuthorMap;
 	static private Map<String, Map<String, List<String>>> tsnToVernacularMap;
+	static private Map<String,TaxonOtherSource[]> tsnToOtherSourcesMap;
+	
 
 
 
@@ -197,12 +200,15 @@ public class MockUtil{
 		tsnToNameMap = new HashMap<String,String>();
 		tsnToRankMap = new HashMap<String,String>();
 		tsnToTaxonomicStandingMap = new HashMap<String,String>();
+		tsnToAuthorMap = new HashMap<String,String>();
 		tsnToCompletenessMap = new HashMap<String,String>();
 		tsnToDownOneLevelNames = new HashMap<String,String[]>() ;
 		tsnToDownOneLevelNames.put(topLevelTsn, topDownOneLevelNames);
 		tsnToDownOneLevelTsns = new HashMap<String,String[]>() ;
 		tsnToDownOneLevelRankNames = new HashMap<String,String[]>() ;
 		tsnToVernacularMap = new HashMap<String, Map<String, List<String>>>();
+		tsnToOtherSourcesMap = new HashMap<String,TaxonOtherSource[]>();
+		
 
 		sharedPub = new TaxonPublication();
 		sharedPub.setReferenceAuthor("Eriksson, O. E., H. -O. Baral, R. S. Currah, K. Hansen, C. P. Kurtzman, G. Rambold et al., eds");
@@ -235,6 +241,10 @@ public class MockUtil{
 		tsnToDownOneLevelNames.put(fungiTsn, fungiDownOneLevelNames);
 		tsnToDownOneLevelTsns.put(fungiTsn, fungiDownOneLevelTsns);
 		tsnToDownOneLevelRankNames.put(fungiTsn, fungiDownOneLevelRankNames);
+		for(int i=0; i<fungiDownOneLevelNames.length; i++){
+			tsnToNameMap.put(fungiDownOneLevelTsns[i], fungiDownOneLevelNames[i]);
+			tsnToRankMap.put(fungiDownOneLevelTsns[i], fungiDownOneLevelRankNames[i]);			
+		}
 
 		//   ascomycota
 		tsnToDownOneLevelNames.put(ascomycotaTsn, ascomycotaDownOneLevelNames);
@@ -300,8 +310,38 @@ public class MockUtil{
 		}
 
 		// caloplacaAlbovariegata
+
+		// OtherSources
+		initOtherSources();
+
+		// authors
+		initAuthors();
+		
 	}
 
+	static void initAuthors(){
+		tsnToAuthorMap.put(caloplacaAlbovariegataTsn, "(de Lesd.) Wetmore");
+		tsnToAuthorMap.put(caloplacaTsn, "Th. Fr.");
+		tsnToAuthorMap.put(teloschistaceaeTsn, "Zahlbr., 1898");
+		tsnToAuthorMap.put(lecanoralesTsn, "Nannf., 1932");
+		
+
+		
+	}
+	
+
+	static void initOtherSources(){
+		TaxonOtherSource sources[] = new TaxonOtherSource[1];
+		TaxonOtherSource source = new TaxonOtherSource();
+		sources[0] = source;
+		tsnToOtherSourcesMap.put(caloplacaTsn, sources);		
+		tsnToOtherSourcesMap.put(caloplacaAlbovariegataTsn, sources);		
+
+		source.setSource("NODC Taxonomic Code");
+		source.setSourceType("database");
+		source.setSourceComment("(version 8.0)");
+	}
+	
 
 	static List<ItisRecord> getKingdoms(){
 		List<ItisRecord> kingdoms = new ArrayList<ItisRecord>();
@@ -324,21 +364,46 @@ public class MockUtil{
 			kir.setTsn(tsn);	
 			kir.setCompleteness(tsnToCompletenessMap.get(tsn));
 			kir.setVernacularNames(tsnToVernacularMap.get(tsn));
-
-
 			kir.setBelowSpeciesRanks(makeBelowRanks(tsn));
+			kir.setOtherSources(makeOtherSources(tsn));
+			kir.setTaxonomicHierarchy(makeTaxonomicHierarchyFromTsn(tsn));
+			if(tsnToAuthorMap.containsKey(tsn)){
+				kir.setNameAuthor(tsnToAuthorMap.get(tsn));
+			}else{
+				kir.setNameAuthor(null);
+			}
+			if(tsn.equals(caloplacaAlbovariegataTsn)){
+				List<TaxonPublication> pubs = new ArrayList<TaxonPublication>(1);
+				pubs.add(sharedPub);
+				kir.setReferences(pubs);
+			}
+			
+			
 			
 			return kir;
+		}else{
+			// If it is not found, send back the fungi record....
+			return makeRecordFromTsn(fungiTsn);
 		}
-		return null;
 	}
+	
+	private static List<TaxonOtherSource> makeOtherSources(String tsn)
+	{
+		TaxonOtherSource[] sources = tsnToOtherSourcesMap.get(tsn);
+		if(sources == null){
+			return null;
+		}
+		
+		return Arrays.asList(sources);
+	}
+	
 
 	static private List<TaxonomicRank> makeBelowRanks(String tsn)
 	{
 		if(!tsnToDownOneLevelNames.containsKey(tsn)){
 			return null;
 		}
-			
+
 		String ranks[] = tsnToDownOneLevelRankNames.get(tsn);
 		String tsns[] = tsnToDownOneLevelTsns.get(tsn);
 		String names[] = tsnToDownOneLevelNames.get(tsn);
@@ -394,6 +459,22 @@ public class MockUtil{
     
 	static final TaxonomicRank makeTaxonomicRankFromTsn(String tsn){
 		TaxonomicRank tr = new TaxonomicRank();
+		tr.setTsn(tsn);
+		tr.setRankName(tsnToRankMap.get(tsn));
+		tr.setRankValue(tsnToNameMap.get(tsn));
 		return tr;
 	}
+
+	static final List<TaxonomicRank> makeTaxonomicHierarchyFromTsn(String tsn)
+	{
+		List<TaxonomicRank> hier = new ArrayList<TaxonomicRank>();
+		for(String hierTsn: hierarchyToCaloplacaAlbovariegata){
+			hier.add(makeTaxonomicRankFromTsn(hierTsn));
+			if(hierTsn.equals(tsn)){
+					break;
+				}
+		}
+		return hier;
+	}
+	
 }
