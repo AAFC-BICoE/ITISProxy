@@ -113,7 +113,7 @@ public class MockUtil{
 	static private String[] pezizomycotinaDownOneLevelRankNames = {RANK_ORDER};
 
 	//#######################################################################################
-	//Unknown: 
+	//Class
 	static private String[] lecanoromycetesDownOneLevelNames = {"C"};
 	static private String[] lecanoromycetesDownOneLevelTsns = {"6"};
 	static private String[] lecanoromycetesDownOneLevelRankNames = {RANK_ORDER};
@@ -126,7 +126,7 @@ public class MockUtil{
 
 
 	//#######################################################################################
-	//Class: 
+	//Suborder: 
 	static private String[] teloschistineaeDownOneLevelNames = {"C"};
 	static private String[] teloschistineaeDownOneLevelTsns = {"6"};
 	static private String[] teloschistineaeDownOneLevelRankNames = {RANK_ORDER};
