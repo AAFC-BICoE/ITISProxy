@@ -1,0 +1,1163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+     <title>ITIS Web Service TSN Search API Descriptions</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="usaITISWebServiceTSNSearchAPIDescriptions_files/itisstyle.css" type="text/css">
+<!-- menu support -->
+    <script src="usaITISWebServiceTSNSearchAPIDescriptions_files/ga.js" async="" type="text/javascript"></script><script src="usaITISWebServiceTSNSearchAPIDescriptions_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/jquery-1.js"></script>
+    <script type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/superfish.js"></script>
+    <script type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/supersubs.js"></script>
+    <script type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="usaITISWebServiceTSNSearchAPIDescriptions_files/superfish.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="usaITISWebServiceTSNSearchAPIDescriptions_files/superfish-vertical.css" media="screen">
+
+
+    <script type="text/javascript">
+        var winPath = window.location.pathname.substring(1);
+        var operation = winPath.toLowerCase().substr(8, 6);
+
+        // initialise plugins
+    $(document).ready(function(){ 
+        $("ul.sf-menu").supersubs({ 
+            minWidth:    5,   // minimum width of sub-menus in em units 
+            maxWidth:    15,   // maximum width of sub-menus in em units 
+            extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+                               // due to slight rounding differences and font-family 
+        }).superfish();  // call supersubs first, then superfish, so that subs are 
+                         // not display:none when measuring. Call before initialising 
+                         // containing tabs for same reason. 
+    });
+    </script>
+<!-- \/ \/ \/ USGS Google Analytics Code. DO NOT edit \/ \/ \/ -->
+    <script type="application/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/usgs-analytics.js"></script><script defer="defer" type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/foresee-trigger.js"></script><script defer="defer" type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/federated-analytics.js"></script><script defer="defer" type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/googleanalytics.js"></script><script defer="defer" type="text/javascript" src="usaITISWebServiceTSNSearchAPIDescriptions_files/usa-search.js"></script>  
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(
+    ['_setAccount', 'UA-37505651-1'],
+    
+    ['_setAllowLinker', true],
+    ['_setMaxCustomVariables', 10],
+    ['_gat._anonymizeIp'],
+    ['_setVisitorCookieTimeout', 15768000000],
+    ['_trackOutbound',{onBounce:true, action:'click'}],
+    ['_trackDownload',{onBounce:true, method:'event', action:'click'}],
+    ['_trackMailTo',{onBounce:true, action:'click'}],
+    ['_trackRealBounce'],
+    ['_trackSocial'],
+    ['_trackError'],
+    ['_trackLoadTime'],
+    ['_trackPageview']
+    );
+     var addthis_config = {
+      data_ga_property: 'UA-37505651-1'
+      }; 
+    
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    
+    </script>
+<!-- /\ /\ /\ USGS Google Analytics Code. DO NOT edit /\ /\ /\ -->
+
+<!-- -->
+        <meta name="keywords" content="Integrated Taxonomic Information System, ITIS, Taxonomy, Taxonomic Data, Taxonomic Classification Report, taxonomic resources, taxonomy, taxonomic databases, taxon, taxa, scientific names, biodiversity, systematics, organisms, species, flora, fauna, nomenclature, classification, diversity, biological  diversity, plants, animals">
+<meta name="description" content="Hosted by the USGS Core Science Analytics and Synthesis. Page designed through the cooperative efforts of interagency ITIS Teams. Point of Contact: itiswebmaster@itis.gov. ">
+
+
+<script src="usaITISWebServiceTSNSearchAPIDescriptions_files/remote.js" type="text/javascript"></script><script src="usaITISWebServiceTSNSearchAPIDescriptions_files/stats.js" type="text/javascript"></script></head>
+<body class="subpage" leftmargin="0" topmargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0">
+    <table summary="This table controls the structure of the page" border="0" cellpadding="0" cellspacing="0" width="668">
+        <tbody>
+            <tr>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="115"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="22"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="531"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="1"></td>
+            </tr>
+            <tr>
+                <td> <img name="sublogo" src="usaITISWebServiceTSNSearchAPIDescriptions_files/sublogo.gif" alt="ITIS Logo" border="0" height="89" width="115"> </td>
+                <td colspan="2"> <img src="usaITISWebServiceTSNSearchAPIDescriptions_files/websvclogo.gif" alt="ITIS Web Service Logo" height="88" width="553"></td>
+                <td> <img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="89" width="1"> </td>
+            </tr>
+            <tr>
+                <td valign="top" width="115">
+                    <!-- menu -->
+                    <ul class="sf-menu sf-vertical sf-js-enabled sf-shadow">
+                                    <li class="current">
+                <a href="http://www.itis.gov/">Home</a>
+            </li>
+            <li class="current">
+                <a class="sf-with-ul" href="#">About ITIS<span class="sf-sub-indicator"> »</span></a>
+                <ul style="float: none; width: 15em; display: none; visibility: hidden;">
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/about_itis.html">About ITIS Page</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/whatsnew.html">What's New</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;"><a class="sf-with-ul" style="float: none; width: auto;" href="#">Organizational Information<span class="sf-sub-indicator"> »</span></a>
+                        <ul style="left: 15em; float: none; width: 15em; display: none; visibility: hidden;">
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/info.html">Background Information</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/organ.html">Organization and Partners</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/mou.html">Memorandum of Understanding</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/itis_primer.html">Data Development History and Data Quality</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/contrib.html">Data Sources, Contributors &amp; Stewards</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/sources.html">Major Data Sources</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a class="sf-with-ul" style="float: none; width: auto;" href="#">Standards and Database Documentation<span class="sf-sub-indicator"> »</span></a>
+			<ul style="left: 15em; float: none; width: 15em; display: none; visibility: hidden;">
+			    <li style="white-space: normal; float: left; width: 100%;">
+			        <a style="float: none; width: auto;" href="http://www.itis.gov/standard.html">Standards and Database Documentation</a>
+                            </li>
+			    <li style="white-space: normal; float: left; width: 100%;">
+			        <a style="float: none; width: auto;" href="http://www.itis.gov/standard.html#data_standards">Data Standards</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/standard.html#data_models">Data Models</a>
+                            </li>
+			</ul>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a class="sf-with-ul" style="float: none; width: auto;" href="#">Frequently Asked Questions<span class="sf-sub-indicator"> »</span></a>
+                        <ul style="left: 15em; float: none; width: 15em; display: none; visibility: hidden;">
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/pdf/faq_itis_tsn.pdf">What is an ITIS TSN?</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/status.html">Data Coverage &amp; Status?</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/glossary.html">Glossary of ITIS Terms?</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/citation.html">How Do I Cite ITIS?</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/standard_report_link.html">How Do I Link to ITIS?</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/download_format.html">What is the format of a download file?</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/comments.html">Contact Us</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="sf-with-ul" href="#">Data Access and Tools<span class="sf-sub-indicator"> »</span></a>
+                <ul style="float: none; width: 15em; display: none; visibility: hidden;">
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/access.html">Data Access Information</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/tools.html">ITIS Tools</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/advanced_search.html">Advanced Search</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a class="sf-with-ul" style="float: none; width: auto;" href="#">Web Services<span class="sf-sub-indicator"> »</span></a>
+                        <ul style="left: 15em; float: none; width: 15em; display: none; visibility: hidden;">
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/web_service.html">Web Service Information</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/ws_description.html">Description of ITIS Web Services</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/ws_develop.html">Developing a Client</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/hierarchy.html">Hiearachical Report</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/taxmatch.html">Compare Names</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/beechecklist.html">Bee Checklist</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="sf-with-ul" href="#">Get ITIS Data<span class="sf-sub-indicator"> »</span></a>
+                <ul style="float: none; width: 15em; display: none; visibility: hidden;">
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a class="sf-with-ul" style="float: none; width: auto;" href="#">Full Database Download<span class="sf-sub-indicator"> »</span></a>
+                        <ul style="left: 15em; float: none; width: 12em; display: none; visibility: hidden;">
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/ftp_download.html">Instructions</a>
+                            </li>
+                            <li style="white-space: normal; float: left; width: 100%;">
+                                <a style="float: none; width: auto;" href="http://www.itis.gov/downloads/index.html">Database Files</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/customdownload.html">Customized Download</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/download.html">Download A Specific Taxonomic Group</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/downloads/index.html">Bee Checklists</a>
+                    </li>
+                </ul>
+			</li>	
+            <li>
+                <a class="sf-with-ul" href="#">Submit and Update Data<span class="sf-sub-indicator"> »</span></a>
+                <ul style="float: none; width: 15em; display: none; visibility: hidden;">
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/submit.html">Data Submission Information</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/submit_guidlines.html">Submission Requirements and Guidelines</a>
+                    </li>
+                    <li style="white-space: normal; float: left; width: 100%;">
+                        <a style="float: none; width: auto;" href="http://www.itis.gov/twb.html">ITIS Taxonomic Workbench</a>
+                    </li>
+                </ul>
+            </li>
+ 
+                    </ul>
+                </td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="230" width="1"></td>
+                <td bgcolor="#ffffff" valign="top">
+<!-- #BeginEditable "subtext" -->
+                    <b><span class="apititle">Web Service Taxonomic Serial Number (TSN) Search APIs</span></b>
+                    <br>
+                    <br>
+                    <a name="getAcceptedNames"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Accepted Names from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns
+        a list of accepted names for the TSN. This can return more than one
+        result if the TSN is for a synonym.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        list of one or more accepted names, or an empty result set if there is
+        no match.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getAcceptedNamesFromTSN?tsn=183671">http://www.itis.gov/ITISWebService/services/ITISService/getAcceptedNamesFromTSN?tsn=183671</a>
+                          <span class="clarify">(tsn not accepted)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getAcceptedNamesFromTSN?tsn=526853">http://www.itis.gov/ITISWebService/services/ITISService/getAcceptedNamesFromTSN?tsn=526853</a>
+                          <span class="clarify">(tsn accepted)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCommentDetail"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Comment Detail from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns the list of comments for the TSN. This can return more than result if multiple comments are entered.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        list of one or more comments, or an empty result set if there is no
+        match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCommentDetailFromTSN?tsn=180543">http://www.itis.gov/ITISWebService/services/ITISService/getCommentDetailFromTSN?tsn=180543</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCommonNames"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Common Names from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns a list of common names for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> A
+        list of one or more common names, or an empty result set if there is no
+        match.</td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=531894">http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=531894</a>
+                          <span class="clarify">(no common name)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=183833">http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=183833</a>
+                          <span class="clarify">(multiple names)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=173441">http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=173441</a>
+                          <span class="clarify">(multiple names/languages)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=27826">http://www.itis.gov/ITISWebService/services/ITISService/getCommonNamesFromTSN?tsn=27826</a>
+                          <span class="clarify">(one name)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCoreMetadata"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Core Metadata from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns the set of core metadata for the TSN. This contains
+        credibility rating, taxonomic usage, unacceptability reason,
+        coverage, and currency data</td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A set of strings containing
+        the credibility rating, taxonomic usage, unacceptability reason,
+        coverage, and currency data, or an empty result set if there is no
+        match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCoreMetadataFromTSN?tsn=28727">http://www.itis.gov/ITISWebService/services/ITISService/getCoreMetadataFromTSN?tsn=28727</a>
+                          <span class="clarify">(coverage and currrency data)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCoreMetadataFromTSN?tsn=183671">http://www.itis.gov/ITISWebService/services/ITISService/getCoreMetadataFromTSN?tsn=183671</a>
+                          <span class="clarify">(no coverage or currency data)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCoverage"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Coverage from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns the taxon coverage information for the TSN. This information is&nbsp; available
+        for Genus and above (rank_id &gt; 190) only.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the coverage data, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCoverageFromTSN?tsn=28727">http://www.itis.gov/ITISWebService/services/ITISService/getCoverageFromTSN?tsn=28727</a>
+                          <span class="clarify">(coverage data</span>)<br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCoverageFromTSN?tsn=526852">http://www.itis.gov/ITISWebService/services/ITISService/getCoverageFromTSN?tsn=526852</a>
+                          <span class="clarify">(no coverage data)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCredibilityRating"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Credibility Rating from TSN</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns the credibility rating for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the credibility rating, or an empty result set if
+        there is no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCredibilityRatingFromTSN?tsn=526852">http://www.itis.gov/ITISWebService/services/ITISService/getCredibilityRatingFromTSN?tsn=526852</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCurrency"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Currency from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td style="width: 601px;" class="body" tyle="vertical-align: middle;">Returns the taxon currency information for the TSN. This information is&nbsp; available
+        for Genus and above (rank_id &gt; 190) only.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A string containing the currency rating, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCurrencyFromTSN?tsn=28727">http://www.itis.gov/ITISWebService/services/ITISService/getCurrencyFromTSN?tsn=28727</a>
+                          <span class="clarify">(currency data)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getCurrencyFromTSN?tsn=526852">http://www.itis.gov/ITISWebService/services/ITISService/getCurrencyFromTSN?tsn=526852</a>
+                          <span class="clarify">(no currency data)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <a name="geDateData"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Date Data from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns the initial time stamp and last update date for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A set of strings containing the dates for the TSN, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getDateDataFromTSN?tsn=180543">http://www.itis.gov/ITISWebService/services/ITISService/getDateDataFromTSN?tsn=180543</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getExperts"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Experts from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns a list of the expert information for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        list of one or more experts, containing the expert, comments, 
+and reference information, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getExpertsFromTSN?tsn=180544">http://www.itis.gov/ITISWebService/services/ITISService/getExpertsFromTSN?tsn=180544</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getFullRecordfmTsn"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Full Record From TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Returns
+        the full ITIS record for a TSN found by comparing the search key to the
+        TSN field, or an empty result set if there is no match.<br>
+                          <br>
+        <span style="font-weight: bold;">Note:</span> Because this API must do
+        multiple database lookups, this can be a time-comsuming operation and
+        may take several seconds to return information.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN.Provides a list of all the unique origin
+        values contained in the databaseProvides a list of all the unique
+        origin values contained in the database </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A set of strings representing the full ITIS record (all ITIS data for the TSN), or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getFullRecordFromTSN?tsn=183833">http://www.itis.gov/ITISWebService/services/ITISService/getFullRecordFromTSN?tsn=183833</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getGeodiv"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle;">&nbsp;<b>Get Geographic Divisions from TSN</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">Returns a list of the geographic divisions for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">A
+        list of geographic divisions, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getGeographicDivisionsFromTSN?tsn=180543">http://www.itis.gov/ITISWebService/services/ITISService/getGeographicDivisionsFromTSN?tsn=180543</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getCompleteness"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 601px;">&nbsp;<b>Get Global Species Completeness from
+        TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">Retruns the taxon completenes rating for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;">A string containing the completeness rating, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 601px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getGlobalSpeciesCompletenessFromTSN?tsn=180541">http://www.itis.gov/ITISWebService/services/ITISService/getGlobalSpeciesCompletenessFromTSN?tsn= 180541</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getJurisdictionalOrigin"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Jurisdictional Origin from
+        TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Rerurns a list of the jurisdiction and origin values for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A set of strings containing the jurisdiction and origin, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getJurisdictionalOriginFromTSN?tsn=180543">http://www.itis.gov/ITISWebService/services/ITISService/getJurisdictionalOriginFromTSN?tsn=180543</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getKingdomName"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle;">&nbsp;<b>Get Kingdom Name from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">Returns the kingdom name for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;">A string containing the kingdom name, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getKingdomNameFromTSN?tsn=202385">http://www.itis.gov/ITISWebService/services/ITISService/getKingdomNameFromTSN?tsn=202385</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getOtherSources"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Other Sources from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns a list of the other sources used for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        list of one or more other sources, containing the source, acquisition
+        date, comment, language, etc., or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getOtherSourcesFromTSN?tsn=182662">http://www.itis.gov/ITISWebService/services/ITISService/getOtherSourcesFromTSN?tsn=182662</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getParentTsn"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Parent TSN from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the parent TSN for the entered TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A string containing the parent tsn, or an empty set if there is no match.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getParentTSNFromTSN?tsn=202385">http://www.itis.gov/ITISWebService/services/ITISService/getParentTSNFromTSN?tsn=202385</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getPubs"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Publications from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns a list of the pulications used for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        list of one or more publications, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getPublicationsFromTSN?tsn=70340">http://www.itis.gov/ITISWebService/services/ITISService/getPublicationsFromTSN?tsn=70340</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getReviewYear"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Review Year from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the review year for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A string containing the review year, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getReviewYearFromTSN?tsn=180541">http://www.itis.gov/ITISWebService/services/ITISService/getReviewYearFromTSN?tsn=180541</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getSciName"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Scientific Name from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the scientific name for the TSN. Also returns the component parts (names and indicators) of the scientific name.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        set of strings containg the full scientific name and the individual
+        name parts and indicators, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getScientificNameFromTSN?tsn=531894">http://www.itis.gov/ITISWebService/services/ITISService/getScientificNameFromTSN?tsn=531894</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getSynonymName"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Synonym Name from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns a list of the synonyms (if any) for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        list of one or more synonyms, or an empty result set if there is
+        no match or the TSN is unaccepted. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getSynonymNamesFromTSN?tsn=183671">http://www.itis.gov/ITISWebService/services/ITISService/getSynonymNamesFromTSN?tsn=183671</a>
+                          <span class="clarify">(tsn not accepted)</span><br>
+                          <a href="http://www.itis.gov/ITISWebService/services/ITISService/getSynonymNamesFromTSN?tsn=526852">http://www.itis.gov/ITISWebService/services/ITISService/getSynonymNamesFromTSN?tsn=526852</a>
+                          <span class="clarify">(tsn accepted)</span><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getTaxonAuthor"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Taxon Authorship from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the author information for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A string containg the taxon author information, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getTaxonAuthorshipFromTSN?tsn=183671">http://www.itis.gov/ITISWebService/services/ITISService/getTaxonAuthorshipFromTSN?tsn=183671</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getTaxRankName"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Taxonomic Rank Name from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the kingdom and rank information for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A string containing the kingdom and rank for the taxon, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getTaxonomicRankNameFromTSN?tsn=202385">http://www.itis.gov/ITISWebService/services/ITISService/getTaxonomicRankNameFromTSN?tsn= 202385</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getTaxUsage"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 565px;">&nbsp;<b>Get Taxonomic Usage from TSN</b> </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">Returns the usage information for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;">A string containing the usage information for the taxon, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 565px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getTaxonomicUsageFromTSN?tsn=526852">http://www.itis.gov/ITISWebService/services/ITISService/getTaxonomicUsageFromTSN?tsn=526852</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <a name="getUnacceptReason"></a>
+                    <table class="apitable" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="vertical-align: middle; width: 559px;">&nbsp;<b>Get Unacceptability Reason from TSN</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Description</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 559px;">Returns the unacceptability reason, if any, for the TSN.<br>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Input</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 559px;">A
+        string containing the ITIS TSN. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Output</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 559px;">A string containing the unacceptability information for the taxon, or an empty result set if there is
+        no match. </td>
+                        </tr>
+                        <tr>
+                          <td style="vertical-align: middle; width: 95px;"><b>Example</b><br>
+                          </td>
+                          <td class="body" style="vertical-align: middle; width: 559px;"> <a href="http://www.itis.gov/ITISWebService/services/ITISService/getUnacceptabilityReasonFromTSN?tsn=183671">
+        http://www.itis.gov/ITISWebService/services/ITISService/getUnacceptabilityReasonFromTSN?tsn= 183671</a><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+<!-- #EndEditable -->
+                </td>
+            </tr>
+            <tr>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="50" width="115"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="22"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="531"></td>
+                <td><img src="usaITISWebServiceTSNSearchAPIDescriptions_files/spacer.gif" alt="spacing image" border="0" height="1" width="1"></td>
+            </tr>
+        </tbody>
+    </table>
+        <table summary="This table controls the structure of the page footer." border="0" cellpadding="0" cellspacing="0" width="669">
+        <tbody>
+            <tr>
+                <td height="35" width="669">
+                    <div align="right">
+                        <img src="usaITISWebServiceTSNSearchAPIDescriptions_files/bar.gif" alt="A gray bar" height="8" width="210">
+                        <div align="right">
+                            <div class="smtag" align="right">
+    <script type="text/javascript">
+        if(operation === "single") {
+            var searchVal = ' ';
+            if(window.location.search.length > 1) {
+                searchVal = window.location.search;
+            }
+
+            console.log('footer displaying a single report page: ', winPath);
+            document.write('                        Generated: Wednesday, 03-Jul-2013 11:40:24 GMT <br>');
+            document.write('                    <a href="/privacy.html" ');
+            document.write('                                   title="Learn more about your privacy on the ITIS website and other site disclaimers.">');
+            document.write('                    <span class="smlink">Privacy statement and disclaimers</span></font></a>&nbsp;&nbsp;<br>');
+            document.write('                    <a href="/citation.html" ');
+            document.write('                                   title="Learn how to properly cite ITIS in your products.">');
+            document.write('                    <span class="smlink">How to cite ITIS</span></font></a>&nbsp;&nbsp;<br>');
+            document.write('                    http://www.itis.gov/', winPath, searchVal, '&nbsp;&nbsp;');
+        }
+        else {
+            console.log('footer displaying a static page: ', operation);
+            document.write('                        Last Updated: Friday, 18-Jan-2013 14:03:39 MST <br>');
+            document.write('                    <a href="/privacy.html" ');
+            document.write('                                   title="Learn more about your privacy on the ITIS website and other site disclaimers.">');
+            document.write('                    <span class="smlink">Privacy statement and disclaimers</span></font></a>&nbsp;&nbsp;<br>');
+            document.write('                    <a href="/citation.html" ');
+            document.write('                                   title="Learn how to properly cite ITIS in your products.">');
+            document.write('                    <span class="smlink">How to cite ITIS</span></font></a>&nbsp;&nbsp;<br>');
+            document.write('                    http://www.itis.gov/ws_tsnApiDescription.html&nbsp;&nbsp;');
+        }
+    </script>                        Last Updated: Friday, 18-Jan-2013 14:03:39 MST <br>                    <a href="http://www.itis.gov/privacy.html" title="Learn more about your privacy on the ITIS website and other site disclaimers.">                    <span class="smlink">Privacy statement and disclaimers</span></a>&nbsp;&nbsp;<br>                    <a href="http://www.itis.gov/citation.html" title="Learn how to properly cite ITIS in your products.">                    <span class="smlink">How to cite ITIS</span></a>&nbsp;&nbsp;<br>                    http://www.itis.gov/ws_tsnApiDescription.html&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+
+
+
+</body></html>

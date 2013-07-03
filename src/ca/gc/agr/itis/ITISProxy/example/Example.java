@@ -9,49 +9,57 @@ import java.util.ArrayList;
 
 
 public final class Example{
-   
+	static final String[] taxaTsns = MockUtil.hierarchyToCaloplacaAlbovariegata;
 
-    public static void main(String [ ] args){
-	kingdoms();
+	public static void main(String [ ] args){
+		printKingdoms();
 
-	fungi();
-    }
-
-
-    static final void kingdoms(){
-	start("Proxy.getKingdoms");
-	try{
-	    List<ItisRecord>kingdoms = Proxy.getKingdoms();
-	    for(ItisRecord kir: kingdoms){
-		Util.printRecord(kir);
-	    }
+		for(String tsn: taxaTsns){
+			printTaxon(tsn);
+		}
 	}
-	catch(Exception e){
-	    e.printStackTrace();
+	
+
+
+	static final void printKingdoms(){
+		start("Proxy.getKingdoms");
+		try{
+			List<ItisRecord>kingdoms = Proxy.getKingdoms();
+			for(ItisRecord kir: kingdoms){
+				Util.printRecord(kir);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		end("Proxy.getKingdoms");
 	}
-	end("Proxy.getKingdoms");
-    }
 
     
-    static final void fungi(){
-	try{
-	    ItisRecord ir = Proxy.getByTSN(MockUtil.fungiTsn);
-	    Util.printRecord(ir);
-	}
-	catch(Exception e){
-	    e.printStackTrace();
-	}
-    }
-    
-    static final String br = "-----------------------------------------------------------------";
-    static void end(String s){
-	//System.out.println(br + " END " + s + br);
-	System.out.println(br);
-    }
+	static final void printTaxon(String tsn){
+		try{
+			start("Proxy: " + tsn);
+			ItisRecord ir = Proxy.getByTSN(tsn);
+			if(ir != null){
+				Util.printRecord(ir);
+				end("Proxy: " + tsn);
+			}
 
-    static void start(String s){
-	//System.out.println(br + " START " + s + br + "\n");
-    }
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+    
+	static final String br = "-----------------------------------------------------------------";
+	static void end(String s){
+		System.out.println("END " + s + br);
+		//System.out.println(br);
+	}
+
+	static void start(String s){
+		System.out.println("\n\nSTART " + s + br + "\n");
+	}
 
 
 

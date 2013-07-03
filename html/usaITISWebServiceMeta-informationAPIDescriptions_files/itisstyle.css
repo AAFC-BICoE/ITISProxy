@@ -1,0 +1,123 @@
+body {
+	font-weight: normal; font-size: 12px; line-height: normal; font-family: Arial, Helvetica, sans-serif; z-index:1;
+}
+head {
+    z-index:2;
+}
+p {
+	font-weight: normal; font-size: 12px; line-height: normal; font-family: Arial, Helvetica, sans-serif
+}
+a {
+	font-weight: normal; font-size: 12px; color: #0000cc; font-family: Arial, Helvetica, sans-serif; text-decoration: underline
+}
+a:hover {
+	font-weight: normal; font-size: 12px; color: #0066cc; font-family: Arial, Helvetica, sans-serif; text-decoration: none
+}
+li {
+	font-size: 12px; font-family: Arial, Helvetica, sans-serif
+}
+h3 {
+	font-weight: bold; font-size: 18px; color: #000000; font-family: Arial, Helvetica, sans-serif
+}
+h4 {
+	font-weight: bold; font-size: 14px; font-family: Arial, Helvetica, sans-serif
+}
+ul {
+	font-size: 12px; font-family: Arial, Helvetica, sans-serif
+}
+ol {
+	font-size: 12px; font-family: Arial, Helvetica, sans-serif
+}
+
+
+.apititle {
+    font-weight: bold; font-size: 18px; color: #000000; font-family: Arial, Helvetica, sans-serif; text-align:center;
+}
+.apitable {
+    text-align: left; width: 100%; border-width:1px; border-spacing:2px; border-style:outset; padding:2px; 
+}
+.apitable td {
+    border-width:1px; padding:2px; border-style:inset;
+}
+.bigger {
+    color: #000000; font-weight: bold; font-size: 11px;
+}
+.body {
+	font-weight: normal; font-size: 12px; line-height: normal; color: #000000; font-family: Arial, Helvetica, sans-serif
+}
+.dblspc {
+    line-height: 150%;
+}
+.tdshort {
+        line-height: 8px; 
+}
+.note {
+	font-size: 11px; color: #000000; font-family: Arial, Helvetica, sans-serif
+}
+.smtag {
+	font-size: 9px; color: #000000; line-height: normal; font-family: Arial, Helvetica, sans-serif
+}
+.subhead {
+	font-weight: bolder; font-size: 16px; color: #0066cc; font-family: Arial, Helvetica, sans-serif; text-decoration: none
+}
+.bigger {
+	color: #000000; font-weight: bold; font-size: 11px;
+}
+.biglink {
+	font-weight: bold; font-size: 14px; color: #0000cc; font-family: Arial, Helvetica, sans-serif; text-decoration: underline
+}
+.biglink:hover {
+	font-weight: bold; font-size: 14px; color: #0000cc; font-family: Arial, Helvetica, sans-serif; text-decoration: none
+}
+.smlink {
+	font-weight: bold; font-size: 9px; color: #0000cc; font-family: Arial, Helvetica, sans-serif; text-decoration: underline
+}
+.smlink:hover {
+	font-weight: bold; font-size: 9px; color: #0000cc; font-family: Arial, Helvetica, sans-serif; text-decoration: none
+}
+.taxon_head {
+	font-weight: bold; font-size: 18px; font-family: Arial, Helvetica, sans-serif
+}
+.level4head {
+	font-weight: bold; font-size: 14px; font-family: Arial, Helvetica, sans-serif
+}
+.whiteboxhead {
+	font-weight: bold; font-size: 18px; color: #ffffff; font-family: Arial, Helvetica, sans-serif; background-color: #6699cc
+}
+.smwhiteboxhead {
+	font-weight: bold; font-size: 14px; color: #ffffff; font-family: Arial, Helvetica, sans-serif; background-color: #6699cc
+}
+.datafield {
+	font-weight: normal; font-size: 12px; color: #000000; font-family: Arial, Helvetica, sans-serif; background-color: #eff4fa
+}
+.alert {
+    font-weight: normal; font-size: 13px; color: black; font-family: Arial, Helvetica, sans-serif; background: #fffacd; padding:20px; border-style: ridge; 
+}
+.noscript_alert {
+    font-weight: normal; font-size: 14px; line-height: normal; color: red; font-family: Arial, Helvetica, sans-serif
+}
+.homepage {
+    background-color: rgb(255, 255, 255); background-image:url('/Static/images/bg.gif');
+
+}
+.subpage {
+    background-color: rgb(255, 255, 255);  background-image:url('/Static/images/bg.gif');
+}
+
+.style1 {
+    color: #999999
+}
+
+.style2 {
+    color: #666666
+}
+
+.itisBtn {
+    font-weight:bold;
+}
+
+.bigBtn
+{
+    font-weight:bold;
+    font-size:15px;
+}

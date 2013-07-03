@@ -1,4 +1,3 @@
-
 package ca.gc.agr.itis.ITISProxy;
 
 import ca.gc.agr.itis.ITISModel.*;
@@ -14,6 +13,9 @@ public class MockUtil{
 
 	}
 
+	static private TaxonPublication sharedPub = null;
+	
+
 	// Languages using https://en.wikipedia.org/wiki/ISO_639-2 
 	static private String ENG = "eng";
 	static private String POR = "por";
@@ -24,6 +26,8 @@ public class MockUtil{
 	static final private String RANK_DIVISION = "Division";
 	static final private String RANK_SUBDIVISION = "Subdivision";
 	static final private String RANK_ORDER = "Order";
+	static final private String RANK_SUBORDER = "Suborder";
+	static final private String RANK_CLASS = "Class";
 	static final private String RANK_FAMILY = "Family";
 	static final private String RANK_GENUS = "Genus";
 	static final private String RANK_SPECIES = "species";
@@ -48,6 +52,7 @@ public class MockUtil{
 
 
 	////////////////////
+	static final public String topLevelTsn = "-1";
 	static final public String fungiTsn = "555705";
 	static final public String ascomycotaTsn = "610624";
 	static final public String pezizomycotinaTsn = "610625";
@@ -56,11 +61,17 @@ public class MockUtil{
 	static final public String teloschistineaeTsn = "191608";
 	static final public String teloschistaceaeTsn = "14034";
 	static final public String caloplacaTsn = "14035";
-	static final public String caloplacaFerrugineaTsn = "191680";
-	static private String[] hierarchyToCaloplacaFerruginea = {fungiTsn, pezizomycotinaTsn, lecanoromycetesTsn, lecanoralesTsn, teloschistineaeTsn, teloschistaceaeTsn, caloplacaTsn, caloplacaFerrugineaTsn};
+	static final public String caloplacaAlbovariegataTsn = "191680";
+
+	static public String[] hierarchyToCaloplacaAlbovariegata = {fungiTsn, ascomycotaTsn, pezizomycotinaTsn, 
+	                                                         lecanoromycetesTsn, lecanoralesTsn, teloschistineaeTsn, 
+	                                                         teloschistaceaeTsn, caloplacaTsn, caloplacaAlbovariegataTsn};
 
 	public static Map<String,String> tsnToNameMap;
 	static private Map<String,String> tsnToRankMap;
+	static private Map<String,String[]> tsnToDownOneLevelNames;
+	static private Map<String,String[]> tsnToDownOneLevelRankNames;
+	static private Map<String,String[]> tsnToDownOneLevelTsns;
 	static private Map<String,String> tsnToTaxonomicStandingMap;
 	static private Map<String,String> tsnToGlobalSpeciesMap;
 	static private Map<String,String> tsnToCompletenessMap;
@@ -70,16 +81,17 @@ public class MockUtil{
 
 
 
-	// Kingdoms
-	static private String[] kingdomNames = {"Monera", "Protozoa", "Plantae", "*Fungi", "Animalia", "Chromista"};
-	static private String[] kingdomTsns = {"202420", "630577", "202422", fungiTsn, "202423", "630578"};
-	static private String[] kingdomRankNames = {RANK_KINGDOM, RANK_KINGDOM,
+	// Kingdoms: special
+	static private String[] topDownOneLevelNames = {"Monera", "Protozoa", "Plantae", "*Fungi", "Animalia", "Chromista"};
+	static private String[] topDownOneLevelTsns = {"202420", "630577", "202422", fungiTsn, "202423", "630578"};
+	static private String[] topDownOneLevelRankNames = {RANK_KINGDOM, RANK_KINGDOM,
 	                                            RANK_KINGDOM, RANK_KINGDOM,
 	                                            RANK_KINGDOM, RANK_KINGDOM};
-	static private String[] kingdomTaxonomicStanding = {TAXONOMIC_STANDING_VALID, TAXONOMIC_STANDING_VALID, 
+
+	static private String[] topLevelTaxonomicStanding = {TAXONOMIC_STANDING_VALID, TAXONOMIC_STANDING_VALID, 
 	                                                    TAXONOMIC_STANDING_ACCEPTED, TAXONOMIC_STANDING_VALID, 
 	                                                    TAXONOMIC_STANDING_ACCEPTED, TAXONOMIC_STANDING_VALID};
-	static private String[] kingdomCompleteness = {COMPLETENESS_UNKNOWN, COMPLETENESS_UNKNOWN, 
+	static private String[] topLevelCompleteness = {COMPLETENESS_UNKNOWN, COMPLETENESS_UNKNOWN, 
 	                                               COMPLETENESS_PARTIAL, COMPLETENESS_UNKNOWN, 
 	                                               COMPLETENESS_UNKNOWN, COMPLETENESS_UNKNOWN, };
 
@@ -87,10 +99,9 @@ public class MockUtil{
 	//#######################################################################################
 	//Kingdom Fungi
 	//   Divisions
-	static private String[] fungalDownOneLevelNames = {"*Ascomycota","Basidiomycota","Deuteromycotina","Myxomycota"};
-	static private String[] fungalDownOneLevelTsns = {ascomycotaTsn,"623881","14115","13762"};
-	static private String[] fungalDownOneLevelRankNames = {RANK_DIVISION, RANK_DIVISION, RANK_DIVISION, RANK_DIVISION};
-
+	static private String[] fungiDownOneLevelNames = {"*Ascomycota","Basidiomycota","Deuteromycotina","Myxomycota"};
+	static private String[] fungiDownOneLevelTsns = {ascomycotaTsn,"623881","14115","13762"};
+	static private String[] fungiDownOneLevelRankNames = {RANK_DIVISION, RANK_DIVISION, RANK_DIVISION, RANK_DIVISION};
 
 	//   Vernacular
 	static private String[] fungiVernacularNamesEng = {"fungi"};
@@ -105,49 +116,75 @@ public class MockUtil{
 	static private String[] ascomycotaDownOneLevelTsns = {"612827", "612828","612829", "610647", "14044", pezizomycotinaTsn};
 	static private String[] ascomycotaDownOneLevelRankNames = { RANK_ORDER, RANK_ORDER, RANK_ORDER, RANK_ORDER, RANK_ORDER, RANK_SUBDIVISION};
 
+	static private String[] ascomycotaSynonyms = {"Ascomycotina", "Ascomycetes"};
+	static private String[] ascomycotaSynonymsTsns = {"13964", "13965"};
+
+	static private String[] ascomycotaVernacularNamesEng = {"asco's", "ascomycetes", "sac fungi"};
+	static private String[] ascomycotaVernacularNamesPor = {"ascomiceto"};
+	static private String[] ascomycotaVernacularNamesFra = {"ascomycètes"};
+
 
 	//#######################################################################################
 	//Subdivision: 
-	static private String[] pezizomycotinaDownOneLevelNames = {"C"};
-	static private String[] pezizomycotinaDownOneLevelTsns = {"6"};
-	static private String[] pezizomycotinaDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] pezizomycotinaDownOneLevelNames = {"Arthoniomycetes", "Chaetothyriomycetes", "Dothideomycetes", 
+	                                                           "Eurotiomycetes", "Laboulbeniomycetes", "*Lecanoromycetes"};
+	static private String[] pezizomycotinaDownOneLevelTsns = {"610629","610632","610631","610633","610636",lecanoromycetesTsn};
+	static private String[] pezizomycotinaDownOneLevelRankNames = {RANK_CLASS, RANK_CLASS, RANK_CLASS,
+	                                                               RANK_CLASS,RANK_CLASS,RANK_CLASS};
+	static private String[] pezizomycotinaSynonyms = {"Asterinales"};
+	static private String[] pezizomycotinaSynonymsTsn = {"1407"};
+	static private String[] pezizomycotinaSynonymsTaxonAuthorship = {"M.E. Barr ex D. Hawksw. O.E. Erikss."};
+
 
 	//#######################################################################################
 	//Class
-	static private String[] lecanoromycetesDownOneLevelNames = {"C"};
-	static private String[] lecanoromycetesDownOneLevelTsns = {"6"};
-	static private String[] lecanoromycetesDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] lecanoromycetesDownOneLevelNames = {"Acarosporineae", "Agyriales", "Gyalectales", 
+	                                                            "Icmadophilaceae", "*Lecanorales", "Pertusariales"};
+	static private String[] lecanoromycetesDownOneLevelTsns = {"189587", "610653", "610643", 
+	                                                           "612916", lecanoralesTsn, "610656"};
+	static private String[] lecanoromycetesDownOneLevelRankNames = {RANK_SUBORDER, RANK_ORDER, RANK_ORDER, 
+	                                                                RANK_FAMILY, RANK_ORDER, RANK_ORDER };
+	static private String[] lecanoromycetesSynonyms = {"Umbilicarineae"};
+	static private String[] lecanoromycetesSynonymsTsn = {"191809"};
+	static private String[] lecanoromycetesSynonymsTaxonAuthorship = {};
 
 	//#######################################################################################
 	//Order: 
-	static private String[] lecanoralesDownOneLevelNames = {"C"};
-	static private String[] lecanoralesDownOneLevelTsns = {"6"};
-	static private String[] lecanoralesDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] lecanoralesDownOneLevelNames = {"Auriculora", "Bartlettiella", "Brigantiaeaceae", 
+	                                                        "Buelliastrum", "Ectolechiaceae", "Eschatogonia", 
+	                                                        "Haploloma", "*Lecanorineae", "*Teloschistineae"};
+	static private String[] lecanoralesDownOneLevelTsns = {"190278", "192013", "191847", 
+	                                                       "191990", "191864", "190166",
+	                                                       "191991", "190073", teloschistineaeTsn};
+
+	static private String[] lecanoralesDownOneLevelRankNames = {RANK_GENUS, RANK_GENUS, RANK_FAMILY, 
+	                                                            RANK_GENUS, RANK_FAMILY, RANK_GENUS, 
+	                                                            RANK_GENUS, RANK_SUBORDER, RANK_SUBORDER};
 
 
 	//#######################################################################################
 	//Suborder: 
-	static private String[] teloschistineaeDownOneLevelNames = {"C"};
-	static private String[] teloschistineaeDownOneLevelTsns = {"6"};
-	static private String[] teloschistineaeDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] teloschistineaeDownOneLevelNames = {"Fuscideaceae", "Letrouitiaceae", "*Teloschistaceae"};
+	static private String[] teloschistineaeDownOneLevelTsns = {"191615", "191610", teloschistaceaeTsn};
+	static private String[] teloschistineaeDownOneLevelRankNames = {RANK_FAMILY,RANK_FAMILY,RANK_FAMILY};
 
 	//#######################################################################################
 	//Family: 	
-	static private String[] teloschistaceaeDownOneLevelNames = {"C"};
-	static private String[] teloschistaceaeDownOneLevelTsns = {"6"};
-	static private String[] teloschistaceaeDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] teloschistaceaeDownOneLevelNames = {"Apatoplaca", "*Caloplaca", "Cephalophysis", "Fulgensia"};
+	static private String[] teloschistaceaeDownOneLevelTsns = {"191633", caloplacaTsn, "191757", "191759"};
+	static private String[] teloschistaceaeDownOneLevelRankNames = {RANK_GENUS, RANK_GENUS, RANK_GENUS, RANK_GENUS,};
 
 	//#######################################################################################
 	//Genus: 
-	static private String[] caloplacaDownOneLevelNames = {"C"};
-	static private String[] caloplacaDownOneLevelTsns = {"6"};
-	static private String[] caloplacaDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] caloplacaDownOneLevelNames = {"Caloplaca adnexa",  "*Caloplaca albovariegata",  "Caloplaca alcarum",  "Caloplaca ammiospila"};
+	static private String[] caloplacaDownOneLevelTsns = {"191635", caloplacaAlbovariegataTsn, "191637", "191638"};
+	static private String[] caloplacaDownOneLevelRankNames = {RANK_SPECIES,RANK_SPECIES,RANK_SPECIES,RANK_SPECIES};
 
 	//#######################################################################################
 	//Species: 
-	static private String[] caloplacaFerrugineaDownOneLevelNames = {"C"};
-	static private String[] caloplacaFerrugineaDownOneLevelTsns = {"6"};
-	static private String[] caloplacaFerrugineaDownOneLevelRankNames = {RANK_ORDER};
+	static private String[] caloplacaAlbovariegataDownOneLevelNames = {};
+	static private String[] caloplacaAlbovariegataDownOneLevelTsns = {};
+	static private String[] caloplacaAlbovariegataDownOneLevelRankNames = {};
 
 	//#######################################################################################
 	static{
@@ -161,20 +198,29 @@ public class MockUtil{
 		tsnToRankMap = new HashMap<String,String>();
 		tsnToTaxonomicStandingMap = new HashMap<String,String>();
 		tsnToCompletenessMap = new HashMap<String,String>();
-		for(int i=0; i<kingdomTsns.length; i++){
-			tsnToNameMap.put(kingdomTsns[i], kingdomNames[i]);
-			tsnToRankMap.put(kingdomTsns[i], kingdomRankNames[i]);
-			tsnToTaxonomicStandingMap.put(kingdomTsns[i], kingdomTaxonomicStanding[i]);
-			tsnToCompletenessMap.put(kingdomTsns[i], kingdomCompleteness[i]);
-		}
-
-		for(int i=0; i<fungalDownOneLevelTsns.length; i++){
-			tsnToNameMap.put(fungalDownOneLevelTsns[i], fungalDownOneLevelNames[i]);
-			tsnToRankMap.put(fungalDownOneLevelTsns[i], fungalDownOneLevelRankNames[i]);
-		}
-
+		tsnToDownOneLevelNames = new HashMap<String,String[]>() ;
+		tsnToDownOneLevelNames.put(topLevelTsn, topDownOneLevelNames);
+		tsnToDownOneLevelTsns = new HashMap<String,String[]>() ;
+		tsnToDownOneLevelRankNames = new HashMap<String,String[]>() ;
 		tsnToVernacularMap = new HashMap<String, Map<String, List<String>>>();
-		// Init Fungal kindom
+
+		sharedPub = new TaxonPublication();
+		sharedPub.setReferenceAuthor("Eriksson, O. E., H. -O. Baral, R. S. Currah, K. Hansen, C. P. Kurtzman, G. Rambold et al., eds");
+		sharedPub.setPubYear("2001");
+		sharedPub.setTitle("Outline of Ascomycota");
+		sharedPub.setPubName("Myconet, vol. 7");
+		sharedPub.setPages("1-88");
+		sharedPub.setPubComment("Electronic version available from Myconet web site at http://www.umu.se/myconet/Myconet.html");
+
+		
+		for(int i=0; i<topDownOneLevelTsns.length; i++){
+			tsnToNameMap.put(topDownOneLevelTsns[i], topDownOneLevelNames[i]);
+			tsnToRankMap.put(topDownOneLevelTsns[i], topDownOneLevelRankNames[i]);
+			tsnToTaxonomicStandingMap.put(topDownOneLevelTsns[i], topLevelTaxonomicStanding[i]);
+			tsnToCompletenessMap.put(topDownOneLevelTsns[i], topLevelCompleteness[i]);
+		}
+
+		// Init Fungi
 		//   Vernacular
 		Map<String, List<String>> fungiLanguageToVernacularNamesMap = new HashMap<String, List<String>>();
 		fungiLanguageToVernacularNamesMap = new HashMap<String, List<String>>();
@@ -183,37 +229,132 @@ public class MockUtil{
 		fungiLanguageToVernacularNamesMap.put(POR, Arrays.asList(fungiVernacularNamesPor));
 		tsnToVernacularMap.put(fungiTsn, fungiLanguageToVernacularNamesMap);
 		//   Vernacular
+
+		// Down one level
+		//   fungi
+		tsnToDownOneLevelNames.put(fungiTsn, fungiDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(fungiTsn, fungiDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(fungiTsn, fungiDownOneLevelRankNames);
+
+		//   ascomycota
+		tsnToDownOneLevelNames.put(ascomycotaTsn, ascomycotaDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(ascomycotaTsn, ascomycotaDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(ascomycotaTsn, ascomycotaDownOneLevelRankNames);
+		for(int i=0; i<ascomycotaDownOneLevelNames.length; i++){
+			tsnToNameMap.put(ascomycotaDownOneLevelTsns[i], ascomycotaDownOneLevelNames[i]);
+			tsnToRankMap.put(ascomycotaDownOneLevelTsns[i], ascomycotaDownOneLevelRankNames[i]);			
+		}
+
+		//   pezizomycotina
+		tsnToDownOneLevelNames.put(pezizomycotinaTsn, pezizomycotinaDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(pezizomycotinaTsn, pezizomycotinaDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(pezizomycotinaTsn, pezizomycotinaDownOneLevelRankNames);
+		for(int i=0; i<pezizomycotinaDownOneLevelNames.length; i++){
+			tsnToNameMap.put(pezizomycotinaDownOneLevelTsns[i], pezizomycotinaDownOneLevelNames[i]);
+			tsnToRankMap.put(pezizomycotinaDownOneLevelTsns[i], pezizomycotinaDownOneLevelRankNames[i]);			
+		}
+
+		//   lecanoromycetes
+		tsnToDownOneLevelNames.put(lecanoromycetesTsn, lecanoromycetesDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(lecanoromycetesTsn, lecanoromycetesDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(lecanoromycetesTsn, lecanoromycetesDownOneLevelRankNames);
+		for(int i=0; i<lecanoromycetesDownOneLevelNames.length; i++){
+			tsnToNameMap.put(lecanoromycetesDownOneLevelTsns[i], lecanoromycetesDownOneLevelNames[i]);
+			tsnToRankMap.put(lecanoromycetesDownOneLevelTsns[i], lecanoromycetesDownOneLevelRankNames[i]);			
+		}
+
+		//   lecanorales
+		tsnToDownOneLevelNames.put(lecanoralesTsn, lecanoralesDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(lecanoralesTsn, lecanoralesDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(lecanoralesTsn, lecanoralesDownOneLevelRankNames);
+		for(int i=0; i<lecanoralesDownOneLevelNames.length; i++){
+			tsnToNameMap.put(lecanoralesDownOneLevelTsns[i], lecanoralesDownOneLevelNames[i]);
+			tsnToRankMap.put(lecanoralesDownOneLevelTsns[i], lecanoralesDownOneLevelRankNames[i]);			
+		}
+
+		//   teloschistineae
+		tsnToDownOneLevelNames.put(teloschistineaeTsn, teloschistineaeDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(teloschistineaeTsn, teloschistineaeDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(teloschistineaeTsn, teloschistineaeDownOneLevelRankNames);
+		for(int i=0; i<teloschistineaeDownOneLevelNames.length; i++){
+			tsnToNameMap.put(teloschistineaeDownOneLevelTsns[i], teloschistineaeDownOneLevelNames[i]);
+			tsnToRankMap.put(teloschistineaeDownOneLevelTsns[i], teloschistineaeDownOneLevelRankNames[i]);			
+		}
+
+		//   teloschistaceae
+		tsnToDownOneLevelNames.put(teloschistaceaeTsn, teloschistaceaeDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(teloschistaceaeTsn, teloschistaceaeDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(teloschistaceaeTsn, teloschistaceaeDownOneLevelRankNames);
+		for(int i=0; i<teloschistaceaeDownOneLevelNames.length; i++){
+			tsnToNameMap.put(teloschistaceaeDownOneLevelTsns[i], teloschistaceaeDownOneLevelNames[i]);
+			tsnToRankMap.put(teloschistaceaeDownOneLevelTsns[i], teloschistaceaeDownOneLevelRankNames[i]);			
+		}
+
+		//   caloplaca
+		tsnToDownOneLevelNames.put(caloplacaTsn, caloplacaDownOneLevelNames);
+		tsnToDownOneLevelTsns.put(caloplacaTsn, caloplacaDownOneLevelTsns);
+		tsnToDownOneLevelRankNames.put(caloplacaTsn, caloplacaDownOneLevelRankNames);
+		for(int i=0; i<caloplacaDownOneLevelNames.length; i++){
+			tsnToNameMap.put(caloplacaDownOneLevelTsns[i], caloplacaDownOneLevelNames[i]);
+			tsnToRankMap.put(caloplacaDownOneLevelTsns[i], caloplacaDownOneLevelRankNames[i]);			
+		}
+
+		// caloplacaAlbovariegata
 	}
 
 
 	static List<ItisRecord> getKingdoms(){
 		List<ItisRecord> kingdoms = new ArrayList<ItisRecord>();
-		for(int i=0; i<kingdomTsns.length; i++){
-			kingdoms.add(makeRecordFromTsn(kingdomTsns[i]));
+		for(int i=0; i<topDownOneLevelTsns.length; i++){
+			kingdoms.add(makeRecordFromTsn(topDownOneLevelTsns[i]));
 		}
 		return kingdoms;
 	}
 
 	static ItisRecord getByTSN(String tsn) throws Exception{
-		ItisRecord ir = makeRecordFromTsn(tsn);
-		if(ir != null){
-			return ir;
-		}
-		return null;
+		return makeRecordFromTsn(tsn);
 	}
 
 	static ItisRecord makeRecordFromTsn(String tsn){
+		//System.out.println(tsn + " " + tsnToNameMap);
+		
 		if(tsnToNameMap.containsKey(tsn)){
 			ItisRecord kir = new ItisRecord();
 			kir.setCombinedName(tsnToNameMap.get(tsn));
 			kir.setTsn(tsn);	
 			kir.setCompleteness(tsnToCompletenessMap.get(tsn));
 			kir.setVernacularNames(tsnToVernacularMap.get(tsn));
+
+
+			kir.setBelowSpeciesRanks(makeBelowRanks(tsn));
+			
 			return kir;
 		}
 		return null;
 	}
 
+	static private List<TaxonomicRank> makeBelowRanks(String tsn)
+	{
+		if(!tsnToDownOneLevelNames.containsKey(tsn)){
+			return null;
+		}
+			
+		String ranks[] = tsnToDownOneLevelRankNames.get(tsn);
+		String tsns[] = tsnToDownOneLevelTsns.get(tsn);
+		String names[] = tsnToDownOneLevelNames.get(tsn);
+
+		List<TaxonomicRank> tRanks = new ArrayList<TaxonomicRank>(ranks.length);
+
+		for(int i=0; i<ranks.length; i++){
+			TaxonomicRank rank = new TaxonomicRank();
+			rank.setRankName(ranks[i]);
+			rank.setTsn(tsns[i]);
+			rank.setRankValue(names[i]);
+			tRanks.add(rank);
+		}
+		return tRanks;
+	}
+	
 	public static List<ItisRecord> getRanksOneRankDownFromTsn(String tsn) throws Exception{
 		switch(tsn){
 		case fungiTsn:
@@ -240,7 +381,7 @@ public class MockUtil{
 		case caloplacaTsn:
 
 			break;
-		case caloplacaFerrugineaTsn:
+		case caloplacaAlbovariegataTsn:
 
 			break;
 		}
