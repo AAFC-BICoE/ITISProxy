@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="itisproxy" default="dist" basedir=".">
+	<description>
+	  ITISProxy
+    </description>
+    <property name="compile.debug"       value="true"/>
+    <property name="compile.deprecation" value="true"/>
+    <property name="compile.optimize"    value="false"/>
+
+
+	<!-- global properties for this build -->
+
+	<property name="Name" value="itisproxy"/>
+	<property name="version" value="1.0"/>
+	<property name="src" location="./src"/>
+	<property name="test" location="./test"/>
+	<property name="build" location="./build"/>
+	<property name="dist"  location="dist"/>
+	<property name="docs"  location="docs"/>
+
+	<property name="jarName" value="itisProxy-${version}.jar" />
+<!-- Start libraries -->
+        <property name="model" value="lib/itisModel-1.jar"/>
+
+<!-- End libraries -->
+
+<!-- Start test libraries -->
+
+<!-- End test libraries -->
+
+	<property name="debug" value="on"/>
+	<property name="optimize" value="on"/>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp>
+			<format property="year" pattern="yyyy" locale="en" />
+		</tstamp>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac 
+		    includeantruntime="false"
+		    srcdir="${src}"
+		    destdir="${build}"
+		    classpath="${model}"		    
+		    debug="${compile.debug}"
+		    deprecation="${compile.deprecation}"
+		    optimize="${compile.optimize}"
+                    >
+
+			<compilerarg value="-Xlint:all"/>
+
+		  </javac>
+	</target>
+
+
+	<target name="dist" depends="compile"
+        description="generate the distribution" 
+        >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib"/>
+       		<jar 
+                   jarfile="${dist}/lib/${jarName}/" 
+                   basedir="${build}"
+                 >
+  		 <manifest>
+                 <!--
+		  <attribute name="Main-Class" value="ca.gnewton.lusql.core.LuSqlMain" />
+                  <attribute name="Class-Path" value="./ ${dbcp} ${lucene} ${cli} ${pool} ${mysql}" />
+                 -->
+		</manifest>
+		</jar>
+	</target>
+
+	<target name="docs" depends="compile">
+		<mkdir dir="${docs}"/>
+		<javadoc 
+             sourcepath="${src}"
+
+             destdir="${docs}"
+             author="true"
+             version="true"
+           	 use="true"
+	         breakiterator="yes"
+             splitindex="true"
+             noindex="false"
+             windowtitle="${Name} API Documentation"
+             doctitle="&lt;font face='Verdana,Arial,sans-serif'>${Name}: Proxy for ITIS project&lt;/font>"
+             bottom="Copyright &#169; ${year} Agriculture and Agri-Food Canada"             
+    />
+	</target>
+
+
+	<target name="clean"
+        description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete file="${dist}/lib/${jarName}"/>
+		<delete dir="${docs}"/>
+	</target>
+
+
+</project>
