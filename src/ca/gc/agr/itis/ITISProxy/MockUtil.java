@@ -421,6 +421,9 @@ public class MockUtil{
 	}
 	
 	public static List<ItisRecord> getRanksOneRankDownFromTsn(String tsn) throws Exception{
+		// NOT implemented
+		// Need to change from 1.7 to 1.6
+		/*
 		switch(tsn){
 		case fungiTsn:
 	    
@@ -450,6 +453,7 @@ public class MockUtil{
 
 			break;
 		}
+		*/
 		return null;
 	}
 

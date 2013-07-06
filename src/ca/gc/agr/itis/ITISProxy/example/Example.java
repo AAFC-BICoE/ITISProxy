@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 
 public final class Example{
-	//static final String[] taxaTsns = MockUtil.hierarchyToCaloplacaAlbovariegata;
 
 	static final String[] taxaTsns = {MockUtil.fungiTsn, MockUtil.ascomycotaTsn, MockUtil.pezizomycotinaTsn, 
 	                             MockUtil.lecanoromycetesTsn, MockUtil.lecanoralesTsn, MockUtil.teloschistineaeTsn, 
