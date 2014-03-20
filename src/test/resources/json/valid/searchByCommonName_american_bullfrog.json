@@ -1,0 +1,18 @@
+{
+   "class":"gov.usgs.itis.itis_service.data.SvcCommonNameList",
+   "commonNames":[
+      {
+         "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+         "commonName":"American Bullfrog",
+         "language":"English",
+         "tsn":"173441"
+      },
+      {
+         "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+         "commonName":"American Bullfrog",
+         "language":"English",
+         "tsn":"775084"
+      }
+   ],
+   "tsn":null
+}

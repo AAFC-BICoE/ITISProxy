@@ -1,0 +1,27 @@
+{
+   "author":null,
+   "class":"gov.usgs.itis.itis_service.data.SvcHierarchyRecordList",
+   "hierarchyList":[
+      {
+         "author":null,
+         "class":"gov.usgs.itis.itis_service.data.SvcHierarchyRecord",
+         "parentName":"Monera",
+         "parentTsn":"202420",
+         "rankName":"Phylum",
+         "taxonName":"Cyanophycota",
+         "tsn":"601"
+      },
+      {
+         "author":null,
+         "class":"gov.usgs.itis.itis_service.data.SvcHierarchyRecord",
+         "parentName":"Monera",
+         "parentTsn":"202420",
+         "rankName":"Phylum",
+         "taxonName":"Bacteria",
+         "tsn":"202421"
+      }
+   ],
+   "rankName":"Kingdom",
+   "sciName":"Monera",
+   "tsn":"202420"
+}

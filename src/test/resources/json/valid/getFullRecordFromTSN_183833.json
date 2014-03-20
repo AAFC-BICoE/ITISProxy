@@ -1,0 +1,341 @@
+
+{
+   "acceptedNameList":{
+      "acceptedNames":[
+         null
+      ],
+      "class":"gov.usgs.itis.itis_service.data.SvcAcceptedNameList",
+      "tsn":"183833"
+   },
+   "class":"gov.usgs.itis.itis_service.data.SvcFullRecord",
+   "commentList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonCommentList",
+      "comments":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonComment",
+            "commentDetail":"Status: U. S. ESA - Endangered; IUCN - Endangered",
+            "commentId":"17973",
+            "commentTimeStamp":"2007-08-15 10:57:25.0",
+            "commentator":"Wilson & Reeder, eds. (2005)",
+            "updateDate":"2007-08-15"
+         },
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonComment",
+            "commentDetail":"Comments: Allocated according to G. M. Allen (1939) and Ellerman et al. (1953). Girman et al. (1993) presented molecular evidence concerning subspecies",
+            "commentId":"17974",
+            "commentTimeStamp":"2007-08-15 10:57:25.0",
+            "commentator":"Wilson & Reeder, eds. (2005)",
+            "updateDate":"2007-08-15"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "commonNameList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCommonNameList",
+      "commonNames":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+            "commonName":"African hunting dog",
+            "language":"English",
+            "tsn":"183833"
+         },
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+            "commonName":"African wild dog",
+            "language":"English",
+            "tsn":"183833"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "completenessRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcGlobalSpeciesCompleteness",
+      "completeness":"",
+      "rankId":220,
+      "tsn":"183833"
+   },
+   "coreMetadata":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCoreMetadata",
+      "credRating":"TWG standards met",
+      "rankId":220,
+      "taxonCoverage":"",
+      "taxonCurrency":"",
+      "taxonUsageRating":"valid",
+      "tsn":"183833",
+      "unacceptReason":""
+   },
+   "credibilityRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCredibilityData",
+      "credRating":"TWG standards met",
+      "tsn":"183833"
+   },
+   "currencyRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCurrencyData",
+      "rankId":220,
+      "taxonCurrency":"",
+      "tsn":"183833"
+   },
+   "dateData":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonDateData",
+      "initialTimeStamp":"1996-06-13 14:51:08.0",
+      "tsn":"183833",
+      "updateDate":"2007-08-15"
+   },
+   "expertList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonExpertList",
+      "experts":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonExpert",
+            "comment":"Curator of North American mammals and Chief of Mammal Section, National Biological Service, Smithsonian Institution, National Museum of Natural History, Washington, DC, USA",
+            "expert":"Alfred L. Gardner",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+
+         },
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonExpert",
+            "comment":"Division of Natural Sciences, Bethel College, 1001 W. McKinley Ave., Mishawaka, IN 46545",
+            "expert":"W. Christopher Wozencraft",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "updateDate":"2003-10-28"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "geographicDivisionList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonGeoDivisionList",
+      "geoDivisions":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonGeoDivision",
+            "geographicValue":"Africa",
+            "updateDate":"1998-01-27"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "hierarchyUp":{
+      "author":null,
+      "class":"gov.usgs.itis.itis_service.data.SvcHierarchyRecord",
+      "parentName":"Lycaon",
+      "parentTsn":"183832",
+      "rankName":"Species",
+      "taxonName":"Lycaon pictus",
+      "tsn":"183833"
+   },
+   "jurisdictionalOriginList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonJurisdictionalOriginList",
+      "jurisdictionalOrigins":[
+         null
+      ],
+      "tsn":"183833"
+   },
+   "kingdom":{
+      "class":"gov.usgs.itis.itis_service.data.SvcKingdomInfo",
+      "kingdomId":"5",
+      "kingdomName":"Animalia  ",
+      "tsn":"183833"
+   },
+   "otherSourceList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSourceList",
+      "otherSources":[
+         {
+            "acquisitionDate":"1996-07-29",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "source":"NODC Taxonomic Code",
+            "sourceComment":"",
+            "sourceType":"database",
+            "updateDate":"2010-01-14",
+            "version":"8.0"
+         },
+         {
+            "acquisitionDate":"1998-09-23",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "source":"Mammal Species of the World",
+            "sourceComment":"http://nmnhgoph.si.edu/msw/",
+            "sourceType":"website",
+            "updateDate":"2005-05-06",
+            "version":"undefined"
+         },
+         {
+            "acquisitionDate":"2001-03-22",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "source":"U. S. Fish and Wildlife Service Endangered Species Program-03/01",
+            "sourceComment":"http://www.fws.gov/endangered/",
+            "sourceType":"website",
+            "updateDate":"2012-11-21",
+            "version":"undefined"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "parentTSN":{
+      "class":"gov.usgs.itis.itis_service.data.SvcParentTsn",
+      "parentTsn":"183832",
+      "tsn":"183833"
+   },
+   "publicationList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonPublicationList",
+      "publications":[
+         {
+            "actualPubDate":"2005-10-01",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonPublication",
+            "isbn":"0-8018-8221-4",
+            "issn":"",
+            "listedPubDate":"2005-10-01",
+            "pages":"2142",
+            "pubComment":"",
+            "pubName":"Mammal Species of the World: A Taxonomic and Geographic Reference, 3rd ed., vols. 1 & 2",
+            "pubPlace":"Baltimore, Maryland, USA",
+            "publisher":"Johns Hopkins University Press",
+            "referenceAuthor":"Wilson, Don E., and DeeAnn M. Reeder, eds.",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               },
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"African wild dog",
+                  "refLanguage":"English",
+                  "referredTsn":"183833"
+               }
+            ],
+            "title":"",
+            "updateDate":"2012-11-29"
+         },
+         {
+            "actualPubDate":"1993-01-01",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonPublication",
+            "isbn":"1-56098-217-9",
+            "issn":"",
+            "listedPubDate":"1993-01-01",
+            "pages":"xviii + 1207",
+            "pubComment":"Corrections were made to text at 3rd printing",
+            "pubName":"Mammal Species of the World: A Taxonomic and Geographic Reference, 2nd ed., 3rd printing",
+            "pubPlace":"Washington, DC, USA",
+            "publisher":"Smithsonian Institution Press",
+            "referenceAuthor":"Wilson, Don E., and DeeAnn M. Reeder, eds.",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "title":"",
+            "updateDate":"2013-03-01"
+         },
+         {
+            "actualPubDate":"2000-01-01",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonPublication",
+            "isbn":"1-56098-383-3",
+            "issn":"",
+            "listedPubDate":"2000-01-01",
+            "pages":"xiv + 204",
+            "pubComment":"With contributions by Bernadette N. Graham, Adam P. Potter, and Mariana M. Upmeyer",
+            "pubName":"Common Names of Mammals of the World",
+            "pubPlace":"Washington, DC, USA",
+            "publisher":"Smithsonian Institution Press",
+            "referenceAuthor":"Wilson, Don E., and F. Russell Cole",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Lycaon pictus",
+                  "refLanguage":null,
+                  "referredTsn":"183833"
+               }
+            ],
+            "title":"",
+            "updateDate":"2013-03-01"
+         }
+      ],
+      "tsn":"183833"
+   },
+   "scientificName":{
+      "author":"(Temminck, 1820)",
+      "class":"gov.usgs.itis.itis_service.data.SvcScientificName",
+      "combinedName":"Lycaon pictus",
+      "kingdom":null,
+      "tsn":"183833",
+      "unitInd1":null,
+      "unitInd2":null,
+      "unitInd3":null,
+      "unitInd4":null,
+      "unitName1":"Lycaon                             ",
+      "unitName2":"pictus",
+      "unitName3":null,
+      "unitName4":null
+   },
+   "synonymList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcSynonymNameList",
+      "synonyms":[
+         null
+      ],
+      "tsn":"183833"
+   },
+   "taxRank":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonRankInfo",
+      "kingdomId":"5",
+      "kingdomName":"Animalia  ",
+      "rankId":"220",
+      "rankName":"Species        ",
+      "tsn":"183833"
+   },
+   "taxonAuthor":{
+      "authorship":"(Temminck, 1820)",
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonAuthorship",
+      "tsn":"183833",
+      "updateDate":"2003-10-28"
+   },
+   "tsn":"183833",
+   "unacceptReason":{
+      "class":"gov.usgs.itis.itis_service.data.SvcUnacceptData",
+      "tsn":"183833",
+      "unacceptReason":null
+   },
+   "usage":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonUsageData",
+      "taxonUsageRating":"valid",
+      "tsn":"183833"
+   }
+}

@@ -1,0 +1,258 @@
+{
+   "acceptedNameList":{
+      "acceptedNames":[
+         null
+      ],
+      "class":"gov.usgs.itis.itis_service.data.SvcAcceptedNameList",
+      "tsn":"526852"
+   },
+   "class":"gov.usgs.itis.itis_service.data.SvcFullRecord",
+   "commentList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonCommentList",
+      "comments":[
+         null
+      ],
+      "tsn":"526852"
+   },
+   "commonNameList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCommonNameList",
+      "commonNames":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+            "commonName":"boxelder",
+            "language":"English",
+            "tsn":"526852"
+         },
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+            "commonName":"ash-leaf maple",
+            "language":"English",
+            "tsn":"526852"
+         },
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcCommonName",
+            "commonName":"boxelder maple",
+            "language":"English",
+            "tsn":"526852"
+         }
+      ],
+      "tsn":"526852"
+   },
+   "completenessRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcGlobalSpeciesCompleteness",
+      "completeness":"",
+      "rankId":240,
+      "tsn":"526852"
+   },
+   "coreMetadata":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCoreMetadata",
+      "credRating":"TWG standards met",
+      "rankId":240,
+      "taxonCoverage":"",
+      "taxonCurrency":"",
+      "taxonUsageRating":"accepted",
+      "tsn":"526852",
+      "unacceptReason":""
+   },
+   "credibilityRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCredibilityData",
+      "credRating":"TWG standards met",
+      "tsn":"526852"
+   },
+   "currencyRating":{
+      "class":"gov.usgs.itis.itis_service.data.SvcCurrencyData",
+      "rankId":240,
+      "taxonCurrency":"",
+      "tsn":"526852"
+   },
+   "dateData":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonDateData",
+      "initialTimeStamp":"1996-11-04 17:57:08.0",
+      "tsn":"526852",
+      "updateDate":"2011-12-08"
+   },
+   "expertList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonExpertList",
+      "experts":[
+         null
+      ],
+      "tsn":"526852"
+   },
+   "geographicDivisionList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonGeoDivisionList",
+      "geoDivisions":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonGeoDivision",
+            "geographicValue":"North America",
+            "updateDate":"1996-11-05"
+         }
+      ],
+      "tsn":"526852"
+   },
+   "hierarchyUp":{
+      "author":null,
+      "class":"gov.usgs.itis.itis_service.data.SvcHierarchyRecord",
+      "parentName":"Acer negundo",
+      "parentTsn":"28749",
+      "rankName":"Variety",
+      "taxonName":"Acer negundo var. interius",
+      "tsn":"526852"
+   },
+   "jurisdictionalOriginList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonJurisdictionalOriginList",
+      "jurisdictionalOrigins":[
+         {
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonJurisdictionalOrigin",
+            "jurisdictionValue":"Continental US",
+            "origin":"Native",
+            "updateDate":"2000-03-15"
+         }
+      ],
+      "tsn":"526852"
+   },
+   "kingdom":{
+      "class":"gov.usgs.itis.itis_service.data.SvcKingdomInfo",
+      "kingdomId":"3",
+      "kingdomName":"Plantae   ",
+      "tsn":"526852"
+   },
+   "otherSourceList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSourceList",
+      "otherSources":[
+         {
+            "acquisitionDate":"2011-07-11",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Acer negundo var. interius",
+                  "refLanguage":null,
+                  "referredTsn":"526852"
+               }
+            ],
+            "source":"Sapindaceae of North America Update",
+            "sourceComment":"Updated for ITIS by the Flora of North America Expertise Network, in connection with an update for USDA PLANTS (2007-2010)",
+            "sourceType":"database",
+            "updateDate":"2011-12-08",
+            "version":"2011"
+         },
+         {
+            "acquisitionDate":"2000-01-21",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Acer negundo var. interius",
+                  "refLanguage":null,
+                  "referredTsn":"526852"
+               }
+            ],
+            "source":"The PLANTS Database",
+            "sourceComment":"National Plant Data Center, NRCS, USDA. Baton Rouge, LA 70874-4490 USA. http://plants.usda.gov",
+            "sourceType":"database",
+            "updateDate":"2004-02-23",
+            "version":"5.1.1"
+         },
+         {
+            "acquisitionDate":"1996-07-26",
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource",
+            "referenceFor":[
+               {
+                  "class":"gov.usgs.itis.itis_service.data.SvcReferenceForElement",
+                  "name":"Acer negundo var. interius",
+                  "refLanguage":null,
+                  "referredTsn":"526852"
+               }
+            ],
+            "source":"The PLANTS Database",
+            "sourceComment":"National Plant Data Center, NRCS, USDA. Baton Rouge, LA 70874-4490 USA. http://plants.usda.gov",
+            "sourceType":"database",
+            "updateDate":"2004-02-23",
+            "version":"4.0.4"
+         }
+      ],
+      "tsn":"526852"
+   },
+   "parentTSN":{
+      "class":"gov.usgs.itis.itis_service.data.SvcParentTsn",
+      "parentTsn":"28749",
+      "tsn":"526852"
+   },
+   "publicationList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonPublicationList",
+      "publications":[
+         null
+      ],
+      "tsn":"526852"
+   },
+   "scientificName":{
+      "author":"(Britton) Sarg.",
+      "class":"gov.usgs.itis.itis_service.data.SvcScientificName",
+      "combinedName":"Acer negundo var. interius",
+      "kingdom":null,
+      "tsn":"526852",
+      "unitInd1":null,
+      "unitInd2":null,
+      "unitInd3":"var.",
+      "unitInd4":null,
+      "unitName1":"Acer                               ",
+      "unitName2":"negundo",
+      "unitName3":"interius",
+      "unitName4":null
+   },
+   "synonymList":{
+      "class":"gov.usgs.itis.itis_service.data.SvcSynonymNameList",
+      "synonyms":[
+         {
+            "author":null,
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonName",
+            "sciName":"Acer negundo ssp. interius",
+            "tsn":"28752"
+         },
+         {
+            "author":null,
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonName",
+            "sciName":"Acer interius",
+            "tsn":"508253"
+         },
+         {
+            "author":null,
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonName",
+            "sciName":"Negundo interius",
+            "tsn":"517491"
+         },
+         {
+            "author":null,
+            "class":"gov.usgs.itis.itis_service.data.SvcTaxonName",
+            "sciName":"Negundo aceroides ssp. interius",
+            "tsn":"526197"
+         }
+      ],
+      "tsn":"526852"
+   },
+   "taxRank":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonRankInfo",
+      "kingdomId":"3",
+      "kingdomName":"Plantae   ",
+      "rankId":"240",
+      "rankName":"Variety        ",
+      "tsn":"526852"
+   },
+   "taxonAuthor":{
+      "authorship":"(Britton) Sarg.",
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonAuthorship",
+      "tsn":"526852",
+      "updateDate":"2011-12-08"
+   },
+   "tsn":"526852",
+   "unacceptReason":{
+      "class":"gov.usgs.itis.itis_service.data.SvcUnacceptData",
+      "tsn":"526852",
+      "unacceptReason":null
+   },
+   "usage":{
+      "class":"gov.usgs.itis.itis_service.data.SvcTaxonUsageData",
+      "taxonUsageRating":"accepted",
+      "tsn":"526852"
+   }
+}
