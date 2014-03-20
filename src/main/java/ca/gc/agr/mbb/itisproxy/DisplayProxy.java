@@ -57,7 +57,7 @@ public class DisplayProxy implements Proxy
     }
 
     public ItisRecord getByTSN(String tsn) throws IllegalArgumentException, FailedProxyRequestException{
-	return realProxy.getByTSN(tsn);
+	return shrinkRecord(realProxy.getByTSN(tsn));
     }
 
     public List<TaxonomicRank> getRanksUpFromTsn(String tsn) throws IllegalArgumentException, FailedProxyRequestException{
@@ -80,12 +80,17 @@ public class DisplayProxy implements Proxy
     private static final List<ItisRecord> makeDisplayList(final List<ItisRecord> records){
 	List<ItisRecord> displayList = new ArrayList<ItisRecord>(records.size());
 	for(ItisRecord rec: records){
-	    ItisRecord displayRec = new ItisRecord();
-	    displayRec.setTsn(rec.getTsn());
-	    displayRec.setCombinedName(rec.getCombinedName());
-	    displayRec.setVernacularNames(rec.getVernacularNames());
-	    displayList.add(displayRec);
+	    ItisRecord displayRec = shrinkRecord(rec);
 	}
 	return displayList;
+    }
+
+    private static final ItisRecord shrinkRecord(final ItisRecord rec){
+	ItisRecord displayRec = new ItisRecord();
+	displayRec.setTsn(rec.getTsn());
+	displayRec.setCombinedName(rec.getCombinedName());
+	displayRec.setVernacularNames(rec.getVernacularNames());
+
+	return displayRec;
     }
 }
