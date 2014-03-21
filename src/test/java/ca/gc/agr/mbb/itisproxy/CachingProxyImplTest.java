@@ -143,14 +143,15 @@ public class CachingProxyImplTest
 
     public void searchByScientificName(String sciName, Proxy p){
 	for(int i=0; i<1; i++){
-	    List<ItisRecord> results = null;
+	    SearchResults searchResults = null;
+
 	    try{
-		results = p.searchByScientificName(sciName, 0, 2000);
+		searchResults = p.searchByScientificName(sciName, 0, 2000);
 	    }catch(Throwable t){
 		t.printStackTrace();
 		Assert.fail();
 	    }
-
+	    List<ItisRecord> results = searchResults.records;
 	    ItisRecord byTsn = null;
 	    for(ItisRecord rec: results){
 		try{

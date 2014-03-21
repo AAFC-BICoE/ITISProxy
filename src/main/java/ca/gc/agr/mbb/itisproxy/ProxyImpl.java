@@ -86,7 +86,9 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     private static Proxy makeProxyImpl(String s){
 	if(s == null){
-	    return  new SqliteProxyImpl();
+	    //FIXXXX
+	    //return  new SqliteProxyImpl();
+	    return null;
 	}
 	return new ProxyImpl();
     }
@@ -153,7 +155,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
 
-    public final List<ItisRecord> searchByAnyMatch(final String s, int start, int end, boolean searchAscending) 
+    public final SearchResults searchByAnyMatch(final String s, int start, int end, boolean searchAscending) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 	Util.checkRange(start, end, "");
 	
@@ -169,11 +171,16 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 						       AnyMatchList.class);
 	List<ItisRecord> results = new ArrayList<ItisRecord>(0);
 
+
+
 	List<AnyMatchItem> items = aml.anyMatchItems;
+
+	SearchResults searchResults = new SearchResults();
+
 
 	if(items != null &&  items.size() > 0){
 	    int numResults = items.size();
-
+	    searchResults.totalResults = numResults;
 	    results = new ArrayList<ItisRecord>(numResults);
 	    for(AnyMatchItem item: items){
 		ItisRecord rec = new ItisRecord();
@@ -190,18 +197,19 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 		}
 	    }
 	}
-	return results;
+	searchResults.records = results;
+	return searchResults;
 
     }
 
 
-    public final List<ItisRecord> searchByCommonName(final String s, final int start, final int end)
+    public final SearchResults searchByCommonName(final String s, final int start, final int end)
 	throws IllegalArgumentException, FailedProxyRequestException{
 	return searchByCommonName(s, start, end, true);
     }
 
 
-    public final List<ItisRecord> searchByCommonNameBeginsWith(final String s, final int start, final int end) 
+    public final SearchResults searchByCommonNameBeginsWith(final String s, final int start, final int end) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 	return searchByCommonNameBeginsWith(s, start, end, 0l);
 
@@ -209,14 +217,14 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
 
     // This method exists to pre-caching (via CacheWarmer) can be done witha delay between requests to reduce impact on ITIS server
-    protected final List<ItisRecord> searchByCommonNameBeginsWith(final String s, final int start, final int end, final long delay) 
+    protected final SearchResults searchByCommonNameBeginsWith(final String s, final int start, final int end, final long delay) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME_BEGINS_WITH, s, start, end, delay);
     }
 
 
-	public final List<ItisRecord> searchByCommonNameEndsWith(final String s, final int start, final int end) 
+	public final SearchResults searchByCommonNameEndsWith(final String s, final int start, final int end) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME_ENDS_WITH, s, start, end);
@@ -229,7 +237,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	return genericSearch(s, false, NO_PAGING, NO_PAGING, searchParameterKey, searchService, jsonContentClass);
     }
 
-    protected final List<ItisRecord> searchByCommonName(final String s, final int start, final int end, final boolean populateScientificName) 
+    protected final SearchResults searchByCommonName(final String s, final int start, final int end, final boolean populateScientificName) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 	
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME, s, start, end);
@@ -273,7 +281,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
 
-    public final List<ItisRecord> searchByScientificName(final String s, final int start, final int end)	
+    public final SearchResults searchByScientificName(final String s, final int start, final int end)	
 	throws IllegalArgumentException, FailedProxyRequestException{
 	return searchByScientificName(s, start, end, 0l);
     }
@@ -282,7 +290,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     // searchByScientificName is used by CachingProxyImpl to pre-warm the cache, and it uses the delay to make sure
     //  we are throttling the requests to the ITIS server. See CachingProxyImpl.WarmCache.run for info
     //
-    public final List<ItisRecord> searchByScientificName(final String s, final int start, final int end, long delay)
+    public final SearchResults searchByScientificName(final String s, final int start, final int end, long delay)
 	throws IllegalArgumentException, FailedProxyRequestException{
 	Util.checkRange(start, end, "");
 	SearchByScientificName sbsn = 
@@ -300,10 +308,14 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	zeroNullContainingList(scientificNames);
 	
 	int totalNumHits = scientificNames.size();
+	SearchResults searchResults = new SearchResults();
+	searchResults.totalResults = totalNumHits;
+	searchResults.records = itisRecords;
+
 	if(scientificNames != null 
 	   && totalNumHits > 0
 	   && totalNumHits > start){
-
+	    
 	    int numHits = min(totalNumHits, end - start);
 
 	    LOGGER.info(" ------------- searchByScientificName total = "
@@ -315,15 +327,20 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 		for(int i=start; i <= end && i<totalNumHits; i++){
 		    scientificName = scientificNames.get(i);
 		    if(scientificName == null){
-			return itisRecords;
+			return searchResults;
 		    }
 		    ItisRecord itisRecord = getByTSN(scientificName.tsn);
+		    itisRecord = reduceRecordSize(itisRecord);
 		    itisRecords.add(itisRecord);
 		}
+		searchResults.records = itisRecords;
 	    }
 	}
+
+	LOGGER.info("searchByScientificNames: itisRecords.count=" + itisRecords.size());
 	LOGGER.info("END searchByScientificNames");
-	return itisRecords;
+
+	return searchResults;
     }
 
     public FullRecord getFullRecordByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
@@ -436,20 +453,21 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	return taxonomicRankRecords;
     }
 
-    protected final List<ItisRecord> searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end) 
+    protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end) 
 	throws IllegalArgumentException, FailedProxyRequestException{
 	return searchByCommonNameGeneric(commonSearchService, s, start, end, 0l);
     }
 
 
-	protected final List<ItisRecord> searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
+    protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
 	throws IllegalArgumentException, FailedProxyRequestException{
-
+	SearchResults searchResults = new SearchResults();
 	SearchByCommonName sbcn = (SearchByCommonName)genericSearch(s, 
 								    WSState.PARAM_SRCH_KEY, commonSearchService,
 								    SearchByCommonName.class);
 	if(sbcn.commonNames == null){
-	    return new ArrayList<ItisRecord>(1);
+	    searchResults.records = new ArrayList<ItisRecord>(0);
+	    return searchResults;
 	}
 
 	zeroNullContainingList(sbcn.commonNames);
@@ -461,6 +479,8 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	
 	int numHits = commonNames.size();
 
+	searchResults.totalResults = numHits;
+
 	LOGGER.info(" ------------- Proxy.searchByCommonName* " 
 		    + " searchString=[" + s + "]"
 		    + "  numHits=" + numHits + "   start=" + start + " end=" + end);
@@ -470,11 +490,13 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    commonName = commonNames.get(i);
 	    if(commonName == null){
 		LOGGER.info(" ------------- Proxy.searchByCommonName*:  !!! commonName is null; i=" + i);
-		return itisRecords;
+		searchResults.records = new ArrayList<ItisRecord>(0);
+		return searchResults;
 	    }
 
 	    LOGGER.info("getByTSN for results: " + commonName.tsn);
 	    itisRecord = getByTSN(commonName.tsn);
+	    itisRecord = reduceRecordSize(itisRecord);
 	    itisRecords.add(itisRecord);
 	    if(delay > 0l){
 		try{
@@ -487,7 +509,8 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	}
 
 	LOGGER.info(" ------------- Proxy.searchByCommonName: itisRecords.size()=" + itisRecords.size());
-	return itisRecords;
+	searchResults.records = itisRecords;
+	return searchResults;
     }
 
 
@@ -799,6 +822,14 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	if(l != null && l.size() == 1 && l.get(0) == null){
 	    l.clear();
 	}
+    }
+
+    protected static final ItisRecord reduceRecordSize(ItisRecord rec){
+	ItisRecord reducedRec = new ItisRecord();
+	reducedRec.setTsn(rec.getTsn());
+	reducedRec.setCombinedName(rec.getCombinedName());
+	reducedRec.setVernacularNames(rec.getVernacularNames());
+	return reducedRec;
     }
 
     private static int min(final int a, final int b){

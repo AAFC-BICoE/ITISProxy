@@ -14,6 +14,7 @@ import ca.gc.agr.itis.itismodel.TaxonomicRank;
 import ca.gc.agr.mbb.itisproxy.FailedProxyRequestException;
 import ca.gc.agr.mbb.itisproxy.ProxyImpl;
 import ca.gc.agr.mbb.itisproxy.Proxy;
+import ca.gc.agr.mbb.itisproxy.SearchResults;
 
 public class Example{
     private final static Logger LOGGER = Logger.getLogger(Example.class.getName());
@@ -80,7 +81,7 @@ public class Example{
     // searchyByAnyMatch
     //////////////////////////////////////
     public static void searchByAnyMatch(final Proxy proxy){
-	List<ItisRecord> results;
+	SearchResults results;
 	try{
 	    results = proxy.searchByAnyMatch(SEARCH_STRING, 0, 20, false);
 	}catch(FailedProxyRequestException e){
@@ -119,7 +120,7 @@ public class Example{
     // searchByCommonName
     //////////////////////////////////////
     private static void searchByCommonName(final Proxy proxy){
-	List<ItisRecord> results;
+	SearchResults results;
 	try{
 	    results = proxy.searchByCommonName(SEARCH_STRING, 0, 20);
 	}catch(FailedProxyRequestException e){
@@ -138,7 +139,7 @@ public class Example{
     // searchByCommonNameBeginsWith
     //////////////////////////////////////
     public static void searchByCommonNameBeginsWith(final Proxy proxy){
-	List<ItisRecord> results;
+	SearchResults results;
 	try{
 	    results = proxy.searchByCommonNameBeginsWith(SEARCH_STRING, 0, 20);
 	}catch(FailedProxyRequestException e){
@@ -156,7 +157,7 @@ public class Example{
     // searchByCommonNameEndsWith
     //////////////////////////////////////
     public static void searchByCommonNameEndsWith(final Proxy proxy){
-	List<ItisRecord> results;
+	SearchResults results;
 	try{
 	    results = proxy.searchByCommonNameEndsWith(SEARCH_STRING, 0, 20);
 	}catch(FailedProxyRequestException e){
@@ -175,7 +176,7 @@ public class Example{
     // searchByScientificName
     //////////////////////////////////////
     public static void searchByScientificName(final Proxy proxy){
-	List<ItisRecord> results;
+	SearchResults results;
 	try{
 	    results = proxy.searchByScientificName(SEARCH_STRING, 0, 20);
 	}catch(FailedProxyRequestException e){
@@ -293,8 +294,9 @@ public class Example{
 	return result.getCombinedName();
     }
 
-    private final static void printSearchResults(List<ItisRecord> results){
-	for(ItisRecord rec: results){
+    private final static void printSearchResults(SearchResults searchResults){
+	List<ItisRecord> records = searchResults.records;
+	for(ItisRecord rec: records){
 	    printSearchResult(rec);
 	}
     }

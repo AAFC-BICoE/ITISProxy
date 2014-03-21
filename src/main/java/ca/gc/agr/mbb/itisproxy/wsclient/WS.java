@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.InputStream;
 
 import ca.gc.agr.mbb.itisproxy.Util;
 import ca.gc.agr.mbb.itisproxy.SearchService;
@@ -113,6 +114,8 @@ public class WS implements SearchService{
 	    
 	    LOGGER.info("Reading entity");
 	    String content = response.readEntity(String.class);
+	    //InputStream input = (InputStream)response.getEntity();
+
 	    if(content != null && content.length() < 4000){
 		LOGGER.info("Response content.substring(0," + RESPONSE_CUTOFF 
 			    + "): [" + content.substring(0,(content.length()>RESPONSE_CUTOFF? RESPONSE_CUTOFF :content.length()))

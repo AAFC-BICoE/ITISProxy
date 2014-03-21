@@ -27,7 +27,8 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SqliteProxyImpl implements Proxy{
+public class SqliteProxyImpl //implements Proxy
+{
     private final static Logger LOGGER = Logger.getLogger(SqliteProxyImpl.class.getName()); 
     public static final String SQLITE3_JDBC_CLASS_NAME = "org.sqlite.JDBC";
     public static final String SQLITE3_URL_KEY = "sqlite3UrlKey";

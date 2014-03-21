@@ -61,7 +61,7 @@ public class DisplayProxyTest
 	int endPage = 10;
 
 	LOGGER.info("searchByScientificName_ShouldWorkWithGoodArguments name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = search();
+	SearchResults results = search();
 	Assert.assertNotNull(results);
     }
 
@@ -74,8 +74,8 @@ public class DisplayProxyTest
 
 	LOGGER.info("searchByScientificName_ShouldWorkWithGoodArguments name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 
-	List<ItisRecord> results = search();
-	ItisRecord rec = results.get(0);
+	SearchResults results = search();
+	ItisRecord rec = results.records.get(0);
 	Assert.assertTrue(results != null
 			  && rec.getTsn() != null
 			  && rec.getCombinedName() != null
@@ -87,11 +87,11 @@ public class DisplayProxyTest
     }
 
 
-    List<ItisRecord> search(){
+    SearchResults search(){
 	String search = ProxyImplTest.searchTermGoodTardigrada;
 	int startPage = 0;
 	int endPage = 10;
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	} catch (Throwable e) {

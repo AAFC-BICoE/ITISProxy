@@ -31,7 +31,7 @@ public class DisplayProxy implements Proxy
 	return realProxy.getKingdoms();
     }
 
-    public List<ItisRecord> searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException{
 	return makeDisplayList(realProxy.searchByAnyMatch(queryString, start, end, sortAscending));
 
     }
@@ -40,19 +40,19 @@ public class DisplayProxy implements Proxy
 	return realProxy.getAnyMatchCount(queryString);
     }
 
-    public List<ItisRecord> searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
 	return makeDisplayList(realProxy.searchByCommonName(queryString, start, end));
     }
 
-    public List<ItisRecord> searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
 	return makeDisplayList(realProxy.searchByCommonNameBeginsWith(queryString, start, end));
     }
 
-    public List<ItisRecord> searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
 	return makeDisplayList(realProxy.searchByCommonNameEndsWith(queryString, start, end));
     }
 
-    public List<ItisRecord> searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
 	return makeDisplayList(realProxy.searchByScientificName(queryString, start, end));
     }
 
@@ -77,12 +77,15 @@ public class DisplayProxy implements Proxy
     }
 
 
-    private static final List<ItisRecord> makeDisplayList(final List<ItisRecord> records){
-	List<ItisRecord> displayList = new ArrayList<ItisRecord>(records.size());
-	for(ItisRecord rec: records){
+    private static final SearchResults makeDisplayList(final SearchResults actualResults){
+	List<ItisRecord> displayList = new ArrayList<ItisRecord>(actualResults.records.size());
+	for(ItisRecord rec: actualResults.records){
 	    ItisRecord displayRec = shrinkRecord(rec);
+	    displayList.add(rec);
 	}
-	return displayList;
+	SearchResults displayResults = new SearchResults(actualResults);
+	displayResults.records = displayList;
+	return displayResults;
     }
 
     private static final ItisRecord shrinkRecord(final ItisRecord rec){

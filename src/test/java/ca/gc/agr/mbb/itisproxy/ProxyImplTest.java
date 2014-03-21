@@ -77,7 +77,7 @@ public class ProxyImplTest
 	int endPage = 10;
 
 	LOGGER.info("searchByScientificName_ShouldWorkWithGoodArguments name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	} catch (Throwable e) {
@@ -95,7 +95,7 @@ public class ProxyImplTest
 	int startPage = 0;
 	int endPage = 10;
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	} catch (Throwable e) {
@@ -104,7 +104,7 @@ public class ProxyImplTest
 	}
 	Assert.assertNotNull(results);
 
-	for(ItisRecord rec: results){
+	for(ItisRecord rec: results.records){
 	    Map<String, List<String>> commonNames = rec.getVernacularNames();
 	    Assert.assertNotNull(commonNames);	    
 	    Assert.assertTrue(commonNames.size() > 0);	    
@@ -119,16 +119,19 @@ public class ProxyImplTest
 	int startPage = 0;
 	int endPage = 10;
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	} catch (Throwable e) {
 	    e.printStackTrace();
+
+	}
+	if(results == null || results.records == null){
 	    Assert.fail();
 	}
-	Assert.assertNotNull(results);
-	LOGGER.info("-------------TardigradaShouldGiveZeroResultsPaged: " + results.size());
-	Assert.assertTrue(results.size() == 9);
+
+	LOGGER.info("-------------TardigradaShouldGiveZeroResultsPaged: " + results.records.size());
+	Assert.assertTrue(results.records.size() == 9);
     }
 
     @Test(timeout=20000)
@@ -139,16 +142,18 @@ public class ProxyImplTest
 	int startPage = 0;
 	int endPage = 4;
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	} catch (Throwable e) {
 	    e.printStackTrace();
 	    Assert.fail();
 	}
-	Assert.assertNotNull(results);
-	LOGGER.info("-------------: TardigradaShouldGiveFiveResultsIfPagingFive" + results.size());
-	Assert.assertEquals(5, results.size());
+	if(results == null || results.records == null){
+	    Assert.fail();
+	}
+	LOGGER.info("-------------: TardigradaShouldGiveFiveResultsIfPagingFive" + results.records.size());
+	Assert.assertEquals(5, results.records.size());
     }
 
     @Test(timeout=20000)
@@ -159,11 +164,11 @@ public class ProxyImplTest
 	int startPage = 90;
 	int endPage = 100;
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
-	List<ItisRecord> results = null;
+	SearchResults results = null;
 	try{
 	    results = proxy.searchByScientificName(search, startPage, endPage);
 	    Assert.assertNotNull(results);
-	    Assert.assertTrue(results.size() == 0);
+	    Assert.assertTrue(results.records.size() == 0);
 	} catch (Throwable e) {
 	    e.printStackTrace();
 	    Assert.assertTrue(false);
@@ -183,7 +188,7 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	    Assert.assertTrue(results != null);
 	}
 	finally{
@@ -205,7 +210,7 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	}
 	finally{
 	    WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME = goodService;
@@ -222,9 +227,9 @@ public class ProxyImplTest
 	int endPage = 10;
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	    Assert.assertTrue(results != null);
-	    Assert.assertTrue(results.size() == 0);
+	    Assert.assertTrue(results.records.size() == 0);
 	} catch (Throwable e) {
 	    e.printStackTrace();
 	    Assert.assertTrue(false);
@@ -240,7 +245,7 @@ public class ProxyImplTest
 	
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	}catch(ca.gc.agr.mbb.itisproxy.FailedProxyRequestException e){
 	    Assert.assertTrue(false);
 	}
@@ -255,7 +260,7 @@ public class ProxyImplTest
 	
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	}catch(FailedProxyRequestException e){
 	    Assert.assertTrue(false);
 	}
@@ -270,7 +275,7 @@ public class ProxyImplTest
 	
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	}catch(FailedProxyRequestException e){
 	    Assert.assertTrue(false);
 	}
@@ -285,7 +290,7 @@ public class ProxyImplTest
 	
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
-	    List<ItisRecord> results = proxy.searchByScientificName(search, startPage, endPage);
+	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
 	}catch(FailedProxyRequestException e){
 	    Assert.assertTrue(false);
 	}
