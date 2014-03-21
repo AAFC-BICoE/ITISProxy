@@ -69,7 +69,7 @@ public class ProxyImplTest
 
 
 
-    @Test(timeout=20000)
+    @Test
     public void searchByScientificName_ShouldWorkWithGoodArguments()
     {
 	String search = searchTermGoodTardigrada;
@@ -87,7 +87,7 @@ public class ProxyImplTest
 	Assert.assertNotNull(results);
     }
 
-    @Test(timeout=20000)
+    @Test
     public void searchByScientificName_ShouldHaveCommonNamesForBullfrog()
     {
 	LOGGER.info("searchByScientificName_ShouldHaveCommonNamesForBullfrog");
@@ -111,7 +111,7 @@ public class ProxyImplTest
 	}
     }
 
-    @Test(timeout=20000)
+    @Test
     public void searchByScientificName_TardigradaShouldGiveNineResults()
     {
 	LOGGER.info("searchByScientificName_TardigradaShouldGiveNineResults");
@@ -134,7 +134,7 @@ public class ProxyImplTest
 	Assert.assertTrue(results.records.size() == 9);
     }
 
-    @Test(timeout=20000)
+    @Test
     public void searchByScientificName_TardigradaShouldGiveFiveResultsIfPagingFive()
     {
 	LOGGER.info("searchByScientificName_TardigradaShouldGiveFiveResultsIfPagingFive");
@@ -156,7 +156,7 @@ public class ProxyImplTest
 	Assert.assertEquals(5, results.records.size());
     }
 
-    @Test(timeout=20000)
+    @Test
     public void searchByScientificName_TardigradaShouldGiveZeroResultsPaged()
     {
 	LOGGER.info("searchByScientificName_TardigradaShouldGiveZeroResultsPaged");
@@ -176,7 +176,7 @@ public class ProxyImplTest
     }
 
     @Test(expected=FailedProxyRequestException.class)
-    public void searchByScientificName_ShouldFailWithBadURLPath() throws FailedProxyRequestException
+    public void searchByScientificName_ShouldFailWithBadURLPath() throws FailedProxyRequestException, TooManyResultsException
     {
 	LOGGER.info("searchByScientificName_ShouldFailWithBadURLPath");
 	String goodPath = WSState.PATH_JSON;
@@ -198,7 +198,7 @@ public class ProxyImplTest
     }
 
     @Test(expected=FailedProxyRequestException.class)
-    public void searchByScientificName_ShouldFailWithBadServicePath() throws FailedProxyRequestException
+    public void searchByScientificName_ShouldFailWithBadServicePath() throws FailedProxyRequestException, TooManyResultsException
     {
 	LOGGER.info("searchByScientificName_ShouldFailWithBadServicePath");
 	String goodService = WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME;
@@ -246,7 +246,9 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
 	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
-	}catch(ca.gc.agr.mbb.itisproxy.FailedProxyRequestException e){
+	}catch(IllegalArgumentException e){
+	    throw e;
+	}catch(Exception e){
 	    Assert.assertTrue(false);
 	}
     }
@@ -261,9 +263,13 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
 	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
-	}catch(FailedProxyRequestException e){
+	}catch(IllegalArgumentException e){
+	    throw e;
+	}catch(Exception e){
+	    e.printStackTrace();
 	    Assert.assertTrue(false);
-	}
+	}	
+
     }
 
     @Test(expected=IllegalArgumentException.class)
@@ -276,7 +282,9 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
 	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
-	}catch(FailedProxyRequestException e){
+	}catch(IllegalArgumentException e){
+	    throw e;
+	}catch(Exception e){
 	    Assert.assertTrue(false);
 	}
     }
@@ -291,7 +299,9 @@ public class ProxyImplTest
 	LOGGER.info("searchByScientificName name=" + search + "  startPage=" + startPage + " endPage=" + endPage);
 	try{
 	    SearchResults results = proxy.searchByScientificName(search, startPage, endPage);
-	}catch(FailedProxyRequestException e){
+	}catch(IllegalArgumentException e){
+	    throw e;
+	}catch(Exception e){
 	    Assert.assertTrue(false);
 	}
     }

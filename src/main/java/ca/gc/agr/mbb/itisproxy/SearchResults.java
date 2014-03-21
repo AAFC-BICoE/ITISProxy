@@ -8,6 +8,7 @@ public class SearchResults{
     public int totalResults = 0;
     public int start = 0;
     public int end = 0;
+    public boolean searchResultsTooLarge = false;
 
     public SearchResults(){
 

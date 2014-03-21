@@ -35,7 +35,7 @@ public interface Proxy extends Closeable{
  * @param  sortAscending  Whether the results should be sorted in ascending order; default: false
  * @returns List<ItisRecord>  List of matching records. If there are none, returns list of length zero.
  */
-    public SearchResults searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException;
+    public SearchResults searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException;
 
 
 /**
@@ -51,7 +51,7 @@ public interface Proxy extends Closeable{
  * @param  end            The end record number of interest
  * @returns List<ItisRecord>  List of matching records. If there are none, returns list of length zero.
  */
-    public SearchResults searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException;
+    public SearchResults searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException;
 
 /**
  * Returns a list of ItisRecords that begin with the query string in ITIS common name field, with the tsn, the combinedName, the author name, and the commonNames(list) set
@@ -60,7 +60,7 @@ public interface Proxy extends Closeable{
  * @param  end            The end record number of interest
  * @returns List<ItisRecord>  List of matching records. If there are none, returns list of length zero.
  */
-    public SearchResults searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException;
+    public SearchResults searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException;
 
 /**
  * Returns a list of ItisRecords that end with the query string in ITIS common name field, with the tsn, the combinedName, the author name, and the commonNames(list) set
@@ -69,7 +69,7 @@ public interface Proxy extends Closeable{
  * @param  end            The end record number of interest
  * @returns List<ItisRecord>  List of matching records. If there are none, returns list of length zero.
  */
-    public SearchResults searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException;
+    public SearchResults searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException;
 
 /**
  * Returns a list of ItisRecords that match the query string in ITIS scientific name field, with the tsn, the combinedName, the author name, and the commonNames(list) set
@@ -78,7 +78,7 @@ public interface Proxy extends Closeable{
  * @param  end            The end record number of interest
  * @returns List<ItisRecord>  List of matching records. If there are none, returns list of length zero.
  */
-    public SearchResults searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException;
+    public SearchResults searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException;
 
    
 /**

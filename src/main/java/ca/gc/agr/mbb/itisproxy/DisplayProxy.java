@@ -31,7 +31,7 @@ public class DisplayProxy implements Proxy
 	return realProxy.getKingdoms();
     }
 
-    public SearchResults searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByAnyMatch(String queryString, int start, int end, boolean sortAscending) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return makeDisplayList(realProxy.searchByAnyMatch(queryString, start, end, sortAscending));
 
     }
@@ -40,19 +40,19 @@ public class DisplayProxy implements Proxy
 	return realProxy.getAnyMatchCount(queryString);
     }
 
-    public SearchResults searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return makeDisplayList(realProxy.searchByCommonName(queryString, start, end));
     }
 
-    public SearchResults searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonNameBeginsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return makeDisplayList(realProxy.searchByCommonNameBeginsWith(queryString, start, end));
     }
 
-    public SearchResults searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByCommonNameEndsWith(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return makeDisplayList(realProxy.searchByCommonNameEndsWith(queryString, start, end));
     }
 
-    public SearchResults searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException{
+    public SearchResults searchByScientificName(String queryString, int start, int end) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return makeDisplayList(realProxy.searchByScientificName(queryString, start, end));
     }
 

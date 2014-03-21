@@ -44,6 +44,7 @@ public class CachingProxyImplTest
 
 	props.setProperty(CachingProxyImpl.TTL_MINUTES_KEY, "1000000");
 	props.setProperty(CachingProxyImpl.BDB_DEFERRED_WRITE_SIZE_KEY, "16");
+	props.setProperty(ca.gc.agr.mbb.itisproxy.ProxyInfo.WEB_SERVICE_MAX_RESULTS_KBYTES_KEY, "99999999");
 	
 	Proxy proxy;
 	proxy = ProxyImpl.instance(props);

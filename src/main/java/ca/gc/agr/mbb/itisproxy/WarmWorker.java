@@ -29,13 +29,13 @@ public class WarmWorker implements Runnable{
 	}
 	try{
 	    runQuery(query);
-	}catch(FailedProxyRequestException e){
+	}catch(Exception e){
 	    e.printStackTrace();
 	}
 	LOGGER.info("END WarmWorker: query=" + query);
     }
 
-    protected void runQuery(String query) throws FailedProxyRequestException{
+    protected void runQuery(String query) throws FailedProxyRequestException, TooManyResultsException{
 	//proxy.searchByCommonNameBeginsWith(query, 0, proxy.warmCacheQueriesMaxNumHits, proxy.warmCacheQueriesDelayMillis);
 	proxy.searchByCommonNameBeginsWith(query, 0, 999999, 1);
     }

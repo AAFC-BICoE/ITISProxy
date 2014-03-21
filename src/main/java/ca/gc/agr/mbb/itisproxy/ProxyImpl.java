@@ -55,7 +55,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     private static DataConverter dataConverter = new JsonDataConverter();
     private static SearchService searchService = new WS();
-
+    private static String maxResultsKBytes = "1000";
     public ProxyImpl(){
 
     }
@@ -98,6 +98,15 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    LOGGER.info("init....");
 	    inited = true;
 	}
+	if(p != null && p.containsKey(WEB_SERVICE_MAX_RESULTS_KBYTES_KEY)){
+	    try{
+		long tmp = Long.decode(p.getProperty(WEB_SERVICE_MAX_RESULTS_KBYTES_KEY));
+	    }catch(NumberFormatException e){
+		e.printStackTrace();
+		LOGGER.warning("Not a long: " + p.getProperty(WEB_SERVICE_MAX_RESULTS_KBYTES_KEY));
+	    }
+	    maxResultsKBytes = p.getProperty(WEB_SERVICE_MAX_RESULTS_KBYTES_KEY);
+	}
     }
     
     public List<ItisRecord> getKingdoms() throws FailedProxyRequestException{
@@ -113,7 +122,14 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    throw new FailedProxyRequestException(e);
 	}
 	*/
-	GetKingdomNames getKingdomNames = (GetKingdomNames)searchService.search(WSState.SERVICE_GET_KINGDOMS, null, dataConverter, GetKingdomNames.class);
+	GetKingdomNames getKingdomNames;
+	try{
+	    getKingdomNames = (GetKingdomNames)searchService.search(WSState.SERVICE_GET_KINGDOMS, null, dataConverter, GetKingdomNames.class);
+	}catch(TooManyResultsException e){
+	    // This should never happen
+	    e.printStackTrace();
+	    throw new FailedProxyRequestException();
+	}
 	
 	List<Kingdom> kingdoms = getKingdomNames.kingdoms;
 	int numKingdoms = kingdoms.size();
@@ -134,8 +150,16 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
 
     public final int getAnyMatchCount(String queryString) throws IllegalArgumentException, FailedProxyRequestException{
-	AnyMatchCount anyMatchCount = (AnyMatchCount)genericSearch(queryString, WSState.PARAM_SRCH_KEY, 
-								   WSState.SERVICE_GET_ANY_MATCH_COUNT, AnyMatchCount.class);
+	AnyMatchCount anyMatchCount;
+	try{
+	    anyMatchCount = (AnyMatchCount)genericSearch(queryString, WSState.PARAM_SRCH_KEY, 
+							 WSState.SERVICE_GET_ANY_MATCH_COUNT, AnyMatchCount.class);
+	}catch(TooManyResultsException e){
+	    // This should never happen
+	    e.printStackTrace();
+	    throw new FailedProxyRequestException();
+	}
+
 	int count;
 	if(anyMatchCount == null){
 	    count = 0;
@@ -156,7 +180,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
 
     public final SearchResults searchByAnyMatch(final String s, int start, int end, boolean searchAscending) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	Util.checkRange(start, end, "");
 	
 	//ITIS pages start at 1
@@ -204,13 +228,13 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
 
     public final SearchResults searchByCommonName(final String s, final int start, final int end)
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	return searchByCommonName(s, start, end, true);
     }
 
 
     public final SearchResults searchByCommonNameBeginsWith(final String s, final int start, final int end) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	return searchByCommonNameBeginsWith(s, start, end, 0l);
 
     }
@@ -218,34 +242,34 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     // This method exists to pre-caching (via CacheWarmer) can be done witha delay between requests to reduce impact on ITIS server
     protected final SearchResults searchByCommonNameBeginsWith(final String s, final int start, final int end, final long delay) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME_BEGINS_WITH, s, start, end, delay);
     }
 
 
 	public final SearchResults searchByCommonNameEndsWith(final String s, final int start, final int end) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	    throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME_ENDS_WITH, s, start, end);
     }	
 
 
     protected final static Object genericSearch(final String s, String searchParameterKey, String searchService, Class jsonContentClass)
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	
 	return genericSearch(s, false, NO_PAGING, NO_PAGING, searchParameterKey, searchService, jsonContentClass);
     }
 
     protected final SearchResults searchByCommonName(final String s, final int start, final int end, final boolean populateScientificName) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	
 	return searchByCommonNameGeneric(WSState.SERVICE_SEARCH_BY_COMMON_NAME, s, start, end);
     }
 
 
     private static final Object genericSearch(final String s, boolean sortAscend, final int start, final int end, String searchParameterKey, String searchServiceName, Class jsonContentClass)
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	if(jsonContentClass == null){
 	    throw new IllegalArgumentException("jsonContentClass cannot be null");
 	}
@@ -277,12 +301,15 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	}
 
 	System.out.println("Convert to class: " + jsonContentClass);
+	if(maxResultsKBytes != null){
+	    getParams.setProperty(SearchService.MAX_RESULTS_KBYTES_KEY, maxResultsKBytes);
+	}
 	return searchService.search(searchServiceName, getParams, dataConverter, jsonContentClass);
     }
 
 
     public final SearchResults searchByScientificName(final String s, final int start, final int end)	
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException {
 	return searchByScientificName(s, start, end, 0l);
     }
 
@@ -291,7 +318,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     //  we are throttling the requests to the ITIS server. See CachingProxyImpl.WarmCache.run for info
     //
     public final SearchResults searchByScientificName(final String s, final int start, final int end, long delay)
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	Util.checkRange(start, end, "");
 	SearchByScientificName sbsn = 
 	    (SearchByScientificName)genericSearch(s, 
@@ -345,9 +372,15 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     public FullRecord getFullRecordByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
 	Util.checkStringIsPositiveInteger(tsn);
-	return (FullRecord)genericSearch(tsn, 
-					 WSState.PARAM_TSN, WSState.SERVICE_GET_FULL_RECORD_FROM_TSN, 
-					 FullRecord.class);
+	try{
+	    return (FullRecord)genericSearch(tsn, 
+					     WSState.PARAM_TSN, WSState.SERVICE_GET_FULL_RECORD_FROM_TSN, 
+					     FullRecord.class);
+	}catch(TooManyResultsException e){
+	    // This should never happen
+	    e.printStackTrace();
+	    throw new FailedProxyRequestException();
+	}
     }
 
     public ItisRecord getByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
@@ -371,7 +404,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	return rec;
     }
 
-    public final ScientificName getScientificNameFromTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
+    public final ScientificName getScientificNameFromTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException,TooManyResultsException{
 	return (ScientificName)genericSearch(tsn, WSState.PARAM_TSN, WSState.SERVICE_GET_SCIENTIFIC_NAME_FROM_TSN, 
 					     ScientificName.class);
     }
@@ -427,9 +460,17 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	if(stopAtSelf && stopAtSelf==throwAwaySelf){
 	    throw new IllegalArgumentException("Only one of stopAtSelf and stopAtSelf can be true at once");
 	}
-	GetFullHierarchyFromTSN gfhft = (GetFullHierarchyFromTSN)genericSearch(tsn, 
+
+	GetFullHierarchyFromTSN gfhft;
+	try{
+	    gfhft = (GetFullHierarchyFromTSN)genericSearch(tsn, 
 							   WSState.PARAM_TSN, service,
 							   GetFullHierarchyFromTSN.class);
+	}catch(TooManyResultsException e){
+	    e.printStackTrace();
+	    throw new FailedProxyRequestException();
+	}
+
 	List<TaxonomicRank> taxonomicRankRecords = new ArrayList<TaxonomicRank>(20);
 	if(gfhft != null && gfhft.hierarchyList != null){
 	    List<HierarchyRecord> hierarchyRecords = gfhft.hierarchyList;
@@ -454,13 +495,13 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
     protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	return searchByCommonNameGeneric(commonSearchService, s, start, end, 0l);
     }
 
 
     protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
-	throws IllegalArgumentException, FailedProxyRequestException{
+	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	SearchResults searchResults = new SearchResults();
 	SearchByCommonName sbcn = (SearchByCommonName)genericSearch(s, 
 								    WSState.PARAM_SRCH_KEY, commonSearchService,
@@ -758,27 +799,6 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    tcl.add(tc);
 	}
 	return tcl;
-    }
-
-    class GetScientificNameFromTSNThread extends Thread {
-	private String tsn;
-	private ItisRecord itisRecord;
-	GetScientificNameFromTSNThread(final String tsn, ItisRecord itisRecord){
-	    this.tsn = tsn; 
-	    this.itisRecord = itisRecord;
-	}
-	
-	public void run() {
-	    ScientificName scientificName;
-	    try{
-		scientificName = getScientificNameFromTSN(tsn);
-	    }
-	    catch(FailedProxyRequestException e){
-		throw new NullPointerException();
-	    }
-	    itisRecord.setCombinedName(scientificName.combinedName);
-	    itisRecord.setNameAuthor(scientificName.author);
-	}
     }
 
 

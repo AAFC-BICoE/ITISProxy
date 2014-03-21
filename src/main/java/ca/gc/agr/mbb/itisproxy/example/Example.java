@@ -36,8 +36,9 @@ public class Example{
        
 	// If you want the location elswhere, make a properties object and setProperty(ProxyInfo.CACHE_LOCATION_KEY, "/home/foo/cache")
 	//
-	Properties p = null;
-	Proxy proxy = ProxyImpl.instance(p);
+	Properties props = new Properties();
+	props.setProperty(ProxyImpl.WEB_SERVICE_MAX_RESULTS_KBYTES_KEY, "9999999");
+	Proxy proxy = ProxyImpl.instance(props);
 	getKingdoms(proxy);
 
 	searchByAnyMatch(proxy);
@@ -88,7 +89,7 @@ public class Example{
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
-	catch(IllegalArgumentException e){
+	catch(Exception e){
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
@@ -131,6 +132,10 @@ public class Example{
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
+	catch(Exception e){
+	    e.printStackTrace();
+	    throw new NullPointerException();
+	}
 	printSearchResults(results);
     }
 
@@ -146,7 +151,7 @@ public class Example{
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
-	catch(IllegalArgumentException e){
+	catch(Exception e){
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
@@ -164,7 +169,7 @@ public class Example{
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
-	catch(IllegalArgumentException e){
+	catch(Exception e){
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
@@ -183,7 +188,7 @@ public class Example{
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}
-	catch(IllegalArgumentException e){
+	catch(Exception e){
 	    e.printStackTrace();
 	    throw new NullPointerException();
 	}

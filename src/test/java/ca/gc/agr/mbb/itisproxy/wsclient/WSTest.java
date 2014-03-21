@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.client.WebTarget;
 
+import ca.gc.agr.mbb.itisproxy.TooManyResultsException;
 import ca.gc.agr.itis.itismodel.ItisRecord;
 import ca.gc.agr.mbb.itisproxy.DataConverter;
 import ca.gc.agr.mbb.itisproxy.JsonDataConverter;
@@ -35,8 +36,13 @@ public class WSTest
     public void serviceSearchByScientificName(){
 	Properties getParams = new Properties();
 	getParams.setProperty("srchKey","Tardigrada");
-	
-	Object results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
+	Object results = null;
+	try{
+	    results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
+	}catch(TooManyResultsException e){
+	    e.printStackTrace();
+	    Assert.fail();
+	}
 
 	Assert.assertTrue(results != null);
     }
@@ -49,7 +55,13 @@ public class WSTest
 	getParams.setProperty("pageNum", "1");
 	getParams.setProperty("ascend", "false");
 	
-	Object results = ws(WSState.SERVICE_SEARCH_FOR_ANY_MATCH_PAGED, getParams);
+	Object results = null;
+	try{
+	    results = ws(WSState.SERVICE_SEARCH_FOR_ANY_MATCH_PAGED, getParams);
+	}catch(TooManyResultsException e){
+	    e.printStackTrace();
+	    Assert.fail();
+	}
 	Assert.assertTrue(results != null);
     }
 
@@ -58,13 +70,19 @@ public class WSTest
 	Properties getParams = new Properties();
 	getParams.setProperty("srchKey","Tardigrazzzzzzzda");
 	
-	Object results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
+	Object results = null;
+	try{
+	    results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
+	}catch(TooManyResultsException e){
+	    e.printStackTrace();
+	    Assert.fail();
+	}
 	Assert.assertTrue(results != null);
     }
 
 
     @Ignore
-    private Object ws(String targetKey, Properties getParams){
+    private Object ws(String targetKey, Properties getParams) throws TooManyResultsException{
 	SearchService ws = new WS();
 	LOGGER.info("Target: " + targetKey + "   GET Properties: " + getParams);
 	return ws.search(targetKey, getParams, dataConverter, ItisRecord.class);
@@ -76,8 +94,13 @@ public class WSTest
 	Properties getParams = new Properties();
 	getParams.setProperty("srchKey","Tardigrada");
 	
-	Object results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
-
+	Object results = null;
+	try{
+	    results = ws(WSState.SERVICE_SEARCH_BY_SCIENTIFIC_NAME, getParams);
+	}catch(TooManyResultsException e){
+	    e.printStackTrace();
+	    Assert.fail();
+	}
 	Assert.assertTrue(results != null);
     }
 

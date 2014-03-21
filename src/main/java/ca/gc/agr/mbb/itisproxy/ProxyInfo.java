@@ -12,5 +12,7 @@ public interface ProxyInfo{
     public static final String NO_CACHING_KEY = "noCaching";
     public static final String PROXY_IMPL_KEY = "proxyImpl";
     public static final String PROXY_FILE_SIZE_KEY=ca.gnewton.tuapait.TCache.BDB_LOG_FILE_SIZE_MB_KEY;
+
+    public static final String WEB_SERVICE_MAX_RESULTS_KBYTES_KEY = "WEB_SERVICE_MAX_RESULTS_KBYTES_KEY";
 }
 

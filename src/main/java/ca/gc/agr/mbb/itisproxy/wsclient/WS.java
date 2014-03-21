@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import java.io.InputStream;
 
 import ca.gc.agr.mbb.itisproxy.Util;
+import ca.gc.agr.mbb.itisproxy.TooManyResultsException;
 import ca.gc.agr.mbb.itisproxy.SearchService;
 import ca.gc.agr.mbb.itisproxy.DataConverter;
 import ca.gc.agr.mbb.itisproxy.entities.DateData;
@@ -29,7 +30,7 @@ public class WS implements SearchService{
     }
 
     // method search(String service, Properties p, dataConverter dc, returnClass rc
-    public Object search(final String service, final Properties getParameters, final DataConverter dataConverter, final Object dataConverterObject) throws IllegalArgumentException, ServiceUnavailableException{
+    public Object search(final String service, final Properties getParameters, final DataConverter dataConverter, final Object dataConverterObject) throws IllegalArgumentException, ServiceUnavailableException, TooManyResultsException{
 	if(service == null){
 	    LOGGER.severe("Service cannot be null");
 	    throw new IllegalArgumentException("Service cannot be null");
@@ -44,15 +45,15 @@ public class WS implements SearchService{
 	    throw new IllegalArgumentException("dataConverter cannot be null");
 	}
 
+	if(getParameters!= null && getParameters.containsKey(SearchService.MAX_RESULTS_KBYTES_KEY)){
+	    LOGGER.info("MAX_RESULTS_KBYTES_KEY: " + 	getParameters.getProperty(SearchService.MAX_RESULTS_KBYTES_KEY));
+	}
+
 	if(dataConverterObject == null){
 	    LOGGER.severe("dataConverterObject cannot be null");
 	    throw new IllegalArgumentException("dataConverterObject cannot be null");
 	}
 
-	// used for testing
-	if(false)
-	    return dataConverter.convert("{   \"acceptedNameList\":{      \"acceptedNames\":[         {            \"acceptedName\":\"Acer rubrum var. drummondii\",            \"acceptedTsn\":\"526853\",            \"author\":null,            \"class\":\"gov.usgs.itis.itis_service.data.SvcAcceptedName\"         }      ],      \"class\":\"gov.usgs.itis.itis_service.data.SvcAcceptedNameList\",      \"tsn\":\"183671\"   },   \"class\":\"gov.usgs.itis.itis_service.data.SvcFullRecord\",   \"commentList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonCommentList\",      \"comments\":[         null      ],      \"tsn\":\"183671\"   },   \"commonNameList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcCommonNameList\",      \"commonNames\":[         null      ],      \"tsn\":\"183671\"   },   \"completenessRating\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcGlobalSpeciesCompleteness\",      \"completeness\":\"\",      \"rankId\":220,      \"tsn\":\"183671\"   },   \"coreMetadata\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcCoreMetadata\",      \"credRating\":\"TWG standards met\",      \"rankId\":220,      \"taxonCoverage\":\"\",      \"taxonCurrency\":\"\",      \"taxonUsageRating\":\"not accepted\",      \"tsn\":\"183671\",      \"unacceptReason\":\"synonym\"   },   \"credibilityRating\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcCredibilityData\",      \"credRating\":\"TWG standards met\",      \"tsn\":\"183671\"   },   \"currencyRating\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcCurrencyData\",      \"rankId\":220,      \"taxonCurrency\":\"\",      \"tsn\":\"183671\"   },   \"dateData\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonDateData\",      \"initialTimeStamp\":\"1996-06-13 14:51:08.0\",      \"tsn\":\"183671\",      \"updateDate\":\"2011-12-08\"   },   \"expertList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonExpertList\",      \"experts\":[         null      ],      \"tsn\":\"183671\"   },   \"geographicDivisionList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonGeoDivisionList\",      \"geoDivisions\":[         null      ],      \"tsn\":\"183671\"   },   \"hierarchyUp\":{      \"author\":null,      \"class\":\"gov.usgs.itis.itis_service.data.SvcHierarchyRecord\",      \"parentName\":null,      \"parentTsn\":null,      \"rankName\":null,      \"taxonName\":null,      \"tsn\":\"183671\"   },   \"jurisdictionalOriginList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonJurisdictionalOriginList\",      \"jurisdictionalOrigins\":[         null      ],      \"tsn\":\"183671\"   },   \"kingdom\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcKingdomInfo\",      \"kingdomId\":\"3\",      \"kingdomName\":\"Plantae   \",      \"tsn\":\"183671\"   },   \"otherSourceList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonOtherSourceList\",      \"otherSources\":[         {            \"acquisitionDate\":\"2011-07-11\",            \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource\",            \"referenceFor\":[               {                  \"class\":\"gov.usgs.itis.itis_service.data.SvcReferenceForElement\",                  \"name\":\"Acer drummondii\",                  \"refLanguage\":null,                  \"referredTsn\":\"183671\"               }            ],            \"source\":\"Sapindaceae of North America Update\",            \"sourceComment\":\"Updated for ITIS by the Flora of North America Expertise Network, in connection with an update for USDA PLANTS (2007-2010)\",            \"sourceType\":\"database\",            \"updateDate\":\"2011-12-08\",            \"version\":\"2011\"         },         {            \"acquisitionDate\":\"1996-07-29\",            \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource\",            \"referenceFor\":[               {                  \"class\":\"gov.usgs.itis.itis_service.data.SvcReferenceForElement\",                  \"name\":\"Acer drummondii\",                  \"refLanguage\":null,                  \"referredTsn\":\"183671\"               }            ],            \"source\":\"NODC Taxonomic Code\",            \"sourceComment\":\"\",            \"sourceType\":\"database\",            \"updateDate\":\"2010-01-14\",            \"version\":\"8.0\"         },         {            \"acquisitionDate\":\"2000-01-21\",            \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource\",            \"referenceFor\":[               {                  \"class\":\"gov.usgs.itis.itis_service.data.SvcReferenceForElement\",                  \"name\":\"Acer drummondii\",                  \"refLanguage\":null,                  \"referredTsn\":\"183671\"               }            ],            \"source\":\"The PLANTS Database\",            \"sourceComment\":\"National Plant Data Center, NRCS, USDA. Baton Rouge, LA 70874-4490 USA. http://plants.usda.gov\",            \"sourceType\":\"database\",            \"updateDate\":\"2004-02-23\",            \"version\":\"5.1.1\"         },         {            \"acquisitionDate\":\"1996-07-26\",            \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonOtherSource\",            \"referenceFor\":[               {                  \"class\":\"gov.usgs.itis.itis_service.data.SvcReferenceForElement\",                  \"name\":\"Acer drummondii\",                  \"refLanguage\":null,                  \"referredTsn\":\"183671\"               }            ],            \"source\":\"The PLANTS Database\",            \"sourceComment\":\"National Plant Data Center, NRCS, USDA. Baton Rouge, LA 70874-4490 USA. http://plants.usda.gov\",            \"sourceType\":\"database\",            \"updateDate\":\"2004-02-23\",            \"version\":\"4.0.4\"         }      ],      \"tsn\":\"183671\"   },   \"parentTSN\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcParentTsn\",      \"parentTsn\":\"0\",      \"tsn\":\"183671\"   },   \"publicationList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonPublicationList\",      \"publications\":[         null      ],      \"tsn\":\"183671\"   },   \"scientificName\":{      \"author\":\"Hook. & Arn. ex Nutt.\",      \"class\":\"gov.usgs.itis.itis_service.data.SvcScientificName\",      \"combinedName\":\"Acer drummondii\",      \"kingdom\":null,      \"tsn\":\"183671\",      \"unitInd1\":null,      \"unitInd2\":null,      \"unitInd3\":null,      \"unitInd4\":null,      \"unitName1\":\"Acer                               \",      \"unitName2\":\"drummondii\",      \"unitName3\":null,      \"unitName4\":null   },   \"synonymList\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcSynonymNameList\",      \"synonyms\":[         null      ],      \"tsn\":\"183671\"   },   \"taxRank\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonRankInfo\",      \"kingdomId\":\"3\",      \"kingdomName\":\"Plantae   \",      \"rankId\":\"220\",      \"rankName\":\"Species        \",      \"tsn\":\"183671\"   },   \"taxonAuthor\":{      \"authorship\":\"Hook. & Arn. ex Nutt.\",      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonAuthorship\",      \"tsn\":\"183671\",      \"updateDate\":\"2000-03-15\"   },   \"tsn\":\"183671\",   \"unacceptReason\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcUnacceptData\",      \"tsn\":\"183671\",      \"unacceptReason\":\"synonym\"   },   \"usage\":{      \"class\":\"gov.usgs.itis.itis_service.data.SvcTaxonUsageData\",      \"taxonUsageRating\":\"not accepted\",      \"tsn\":\"183671\"   }}", dataConverterObject);
-	
 	WebTarget thisTarget = WSState.getTarget(service);
 	LOGGER.info("URL: " + WSState.URL_HOST + "/" + WSState.PATH_JSON + "/" + service);
 
@@ -67,7 +68,9 @@ public class WS implements SearchService{
 	    Iterator<String> it = getParameters.stringPropertyNames().iterator();
 	    while(it.hasNext()){
 		String key = it.next();
-		thisTarget = thisTarget.queryParam(key, getParameters.getProperty(key));
+		if(key != SearchService.MAX_RESULTS_KBYTES_KEY){
+		    thisTarget = thisTarget.queryParam(key, getParameters.getProperty(key));
+		}
 	    }
 	}
 
@@ -107,6 +110,14 @@ public class WS implements SearchService{
 	    LOGGER.info("Response last-Modified: " + response.getLastModified());
 	    LOGGER.info("Response length: " + response.getLength());
 
+	    long maxResultsKBytes = getMaxResultsKBytes(getParameters);
+
+	    LOGGER.info("Response length kb: "  
+			+ response.getLength() / 1024
+			+ "   maxResultsKBytes=" + maxResultsKBytes);
+
+	    checkResponseLength(response.getLength(), maxResultsKBytes);
+
 	    if (response.getStatus() != 200) {
 		LOGGER.info("####### Bad HTTP Response status:  [" + response.getStatus() + "]");
 		return null;
@@ -114,6 +125,9 @@ public class WS implements SearchService{
 	    
 	    LOGGER.info("Reading entity");
 	    String content = response.readEntity(String.class);
+
+	    // We have to do this twice because some queries return -1 response.length
+	    checkResponseLength(content.length(), maxResultsKBytes);
 	    //InputStream input = (InputStream)response.getEntity();
 
 	    if(content != null && content.length() < 4000){
@@ -140,5 +154,26 @@ public class WS implements SearchService{
 	}
     }
 
+    private long getMaxResultsKBytes(Properties p){
+	if(p != null && p.containsKey(MAX_RESULTS_KBYTES_KEY)){
+	    try{
+		return Long.decode(p.getProperty(MAX_RESULTS_KBYTES_KEY));
+	    }catch(NumberFormatException e){
+		LOGGER.severe("Not a number: MAX_RESULTS_KBYTES_KEY value=" + p.getProperty(MAX_RESULTS_KBYTES_KEY));
+		e.printStackTrace();
+	    }
+	}
+	return Long.MAX_VALUE;
+    }
 
+
+    private void checkResponseLength(long responseLength, long maxKb) throws TooManyResultsException{
+	if(responseLength / 1024 > maxKb){
+	    String msg = "Response length too big: " 
+		+ responseLength / 1024
+		+ " > maxResultsKBytes=" + maxKb;
+	    LOGGER.severe(msg);
+	    throw new TooManyResultsException(msg);
+	}
+    }
 }//
