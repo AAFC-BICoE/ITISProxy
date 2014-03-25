@@ -27,7 +27,7 @@ public class ProxyImplTest
     private final static Logger LOGGER = Logger.getLogger(ca.gc.agr.mbb.itisproxy.TestInfo.TEST_LOG); 
 
     public final String tsnMastigocoleusTestarum1378 = "1378";
-    public final String tsnBullfrog_MultipleCommonNames_173441 = "Rana catesbeiana";
+    public static final String tsnBullfrog_MultipleCommonNames_173441 = "Rana catesbeiana";
     public final String tsnMonera202420 = "202420";
     public static final String searchTermGoodTardigrada = "Tardigrada";
     public final String searchTermBadTardigradaZzzz = searchTermGoodTardigrada + "zzzzzzzzzzzzz";

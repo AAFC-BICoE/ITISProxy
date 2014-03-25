@@ -2,6 +2,8 @@ package ca.gc.agr.mbb.itisproxy;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ca.gc.agr.mbb.itisproxy.sqlite3.SqliteProxyImpl;
 import ca.gc.agr.itis.itismodel.ItisRecord;
 import ca.gc.agr.itis.itismodel.TaxonComment;
 import ca.gc.agr.itis.itismodel.TaxonExpert;
@@ -27,6 +28,7 @@ import ca.gc.agr.mbb.itisproxy.entities.CommonName;
 import ca.gc.agr.mbb.itisproxy.entities.CommonNamesList;
 import ca.gc.agr.mbb.itisproxy.entities.Expert;
 import ca.gc.agr.mbb.itisproxy.entities.FullRecord;
+import ca.gc.agr.mbb.itisproxy.entities.GeoDivision;
 import ca.gc.agr.mbb.itisproxy.entities.GetFullHierarchyFromTSN;
 import ca.gc.agr.mbb.itisproxy.entities.GetKingdomNames;
 import ca.gc.agr.mbb.itisproxy.entities.HierarchyRecord;
@@ -36,10 +38,10 @@ import ca.gc.agr.mbb.itisproxy.entities.OtherSource;
 import ca.gc.agr.mbb.itisproxy.entities.Publication;
 import ca.gc.agr.mbb.itisproxy.entities.ScientificName;
 import ca.gc.agr.mbb.itisproxy.entities.SearchByCommonName;
-import ca.gc.agr.mbb.itisproxy.entities.TaxRank;
-import ca.gc.agr.mbb.itisproxy.entities.GeoDivision;
 import ca.gc.agr.mbb.itisproxy.entities.SearchByScientificName;
 import ca.gc.agr.mbb.itisproxy.entities.Synonym;
+import ca.gc.agr.mbb.itisproxy.entities.TaxRank;
+import ca.gc.agr.mbb.itisproxy.sqlite3.SqliteProxyImpl;
 import ca.gc.agr.mbb.itisproxy.wsclient.WS;
 import ca.gc.agr.mbb.itisproxy.wsclient.WSState;
 
@@ -56,6 +58,11 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     private static DataConverter dataConverter = new JsonDataConverter();
     private static SearchService searchService = new WS();
     private static String maxResultsKBytes = "1000";
+
+    //private static final ScientificNameComparator scientificNameComparator = new ScientificNameComparator();
+    private static final ScientificNameComparator scientificNameComparator = new ScientificNameComparator();;
+    private static final CommonNameComparator commonNameComparator = new CommonNameComparator();
+
     public ProxyImpl(){
 
     }
@@ -107,6 +114,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    }
 	    maxResultsKBytes = p.getProperty(WEB_SERVICE_MAX_RESULTS_KBYTES_KEY);
 	}
+
     }
     
     public List<ItisRecord> getKingdoms() throws FailedProxyRequestException{
@@ -257,7 +265,6 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     protected final static Object genericSearch(final String s, String searchParameterKey, String searchService, Class jsonContentClass)
 	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
-	
 	return genericSearch(s, false, NO_PAGING, NO_PAGING, searchParameterKey, searchService, jsonContentClass);
     }
 
@@ -268,7 +275,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
 
-    private static final Object genericSearch(final String s, boolean sortAscend, final int start, final int end, String searchParameterKey, String searchServiceName, Class jsonContentClass)
+    public static final Object genericSearch(final String s, boolean sortAscend, final int start, final int end, String searchParameterKey, String searchServiceName, Class jsonContentClass)
 	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	if(jsonContentClass == null){
 	    throw new IllegalArgumentException("jsonContentClass cannot be null");
@@ -332,6 +339,8 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	List<ItisRecord> itisRecords = new ArrayList<ItisRecord>(0);
 
 	List<ScientificName> scientificNames = sbsn.scientificNames;
+	Collections.sort(scientificNames, scientificNameComparator);
+
 	zeroNullContainingList(scientificNames);
 	
 	int totalNumHits = scientificNames.size();
@@ -370,7 +379,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	return searchResults;
     }
 
-    public FullRecord getFullRecordByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
+    public static FullRecord getFullRecordByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
 	Util.checkStringIsPositiveInteger(tsn);
 	try{
 	    return (FullRecord)genericSearch(tsn, 
@@ -385,6 +394,10 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 
     public ItisRecord getByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
 	LOGGER.info("START getByTSN: " + tsn);
+	return internalGetByTSN(tsn);
+    }
+
+    protected static final  ItisRecord internalGetByTSN(final String tsn) throws IllegalArgumentException, FailedProxyRequestException{
 	Util.checkStringIsPositiveInteger(tsn);
 
 	ItisRecord rec = null;
@@ -399,8 +412,6 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	cleanFullRecord(fullRecord);
 	
 	rec = populateFullItisRecord(fullRecord);
-
-	LOGGER.info("END getByTSN: " + tsn);
 	return rec;
     }
 
@@ -500,7 +511,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
 
-    protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
+    protected static final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
 	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	SearchResults searchResults = new SearchResults();
 	SearchByCommonName sbcn = (SearchByCommonName)genericSearch(s, 
@@ -512,7 +523,9 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	}
 
 	zeroNullContainingList(sbcn.commonNames);
-	List<CommonName> commonNames = sbcn.commonNames;    
+	List<CommonName> commonNames = sbcn.commonNames;
+	Collections.sort(commonNames, commonNameComparator);
+	
 
 	List<ItisRecord> itisRecords = new ArrayList<ItisRecord>(commonNames.size());
 
@@ -536,7 +549,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    }
 
 	    LOGGER.info("getByTSN for results: " + commonName.tsn);
-	    itisRecord = getByTSN(commonName.tsn);
+	    itisRecord = internalGetByTSN(commonName.tsn);
 	    itisRecord = reduceRecordSize(itisRecord);
 	    itisRecords.add(itisRecord);
 	    if(delay > 0l){
@@ -898,5 +911,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    ir.addBelowSpeciesRank(rank);
 	}
     }
+
+
 
 }
