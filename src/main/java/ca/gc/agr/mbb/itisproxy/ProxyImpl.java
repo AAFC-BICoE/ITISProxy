@@ -511,7 +511,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
     }
 
 
-    protected static final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
+    protected final SearchResults searchByCommonNameGeneric(final String commonSearchService, final String s, final int start, final int end, final long delay) 
 	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	SearchResults searchResults = new SearchResults();
 	SearchByCommonName sbcn = (SearchByCommonName)genericSearch(s, 
@@ -549,7 +549,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	    }
 
 	    LOGGER.info("getByTSN for results: " + commonName.tsn);
-	    itisRecord = internalGetByTSN(commonName.tsn);
+	    itisRecord = getByTSN(commonName.tsn);
 	    itisRecord = reduceRecordSize(itisRecord);
 	    itisRecords.add(itisRecord);
 	    if(delay > 0l){
