@@ -25,7 +25,7 @@ import ca.gc.agr.mbb.itisproxy.entities.AnyMatchItem;
 import ca.gc.agr.mbb.itisproxy.entities.AnyMatchList;
 import ca.gc.agr.mbb.itisproxy.entities.Comment;
 import ca.gc.agr.mbb.itisproxy.entities.CommonName;
-import ca.gc.agr.mbb.itisproxy.entities.CommonNamesList;
+import ca.gc.agr.mbb.itisproxy.entities.CommonNameList;
 import ca.gc.agr.mbb.itisproxy.entities.Expert;
 import ca.gc.agr.mbb.itisproxy.entities.FullRecord;
 import ca.gc.agr.mbb.itisproxy.entities.GeoDivision;
@@ -220,7 +220,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 		rec.setCombinedName(item.sciName);
 		rec.setNameAuthor(item.author);
 		results.add(rec);
-		CommonNamesList names = item.commonNamesList;
+		CommonNameList names = item.commonNamesList;
 		if(names == null){
 		    continue;
 		}

@@ -9,8 +9,8 @@ public class AnyMatchItem extends BaseTsn{
     @JsonProperty("author")
     public String author;
 
-    @JsonProperty("commonNamesList")
-    public CommonNamesList commonNamesList;
+    @JsonProperty("commonNameList")
+    public CommonNameList commonNamesList;
     
     @JsonProperty("sciName")
     public String sciName;

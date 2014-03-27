@@ -12,7 +12,7 @@ public class FullRecord extends BaseTsn{
     public CommentList commentList;
 
     @JsonProperty("commonNameList")
-    public CommonNamesList commonNameList;
+    public CommonNameList commonNameList;
 
     @JsonProperty("completenessRating")
     public CompletenessRating completenessRating;
@@ -133,7 +133,7 @@ public class FullRecord extends BaseTsn{
     public FullRecord(){
 	acceptedNamesList = new AcceptedNamesList(); 
 	commentList = new CommentList(); 
-	commonNameList = new CommonNamesList(); 
+	commonNameList = new CommonNameList(); 
 	completenessRating = new CompletenessRating(); 
 	coreMetadata = new CoreMetadata(); 
 	currencyRating = new CurrencyRating(); 
