@@ -191,11 +191,6 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	throws IllegalArgumentException, FailedProxyRequestException, TooManyResultsException{
 	Util.checkRange(start, end, "");
 	
-	//ITIS pages start at 1
-	if(start == 0){
-	    ++start;
-	    ++end;
-	}
 	AnyMatchList aml = (AnyMatchList)genericSearch(s, searchAscending, 
 						       start, end, 
 						       WSState.PARAM_SRCH_KEY, 
@@ -298,7 +293,8 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	LOGGER.info("genericSearch s=" + s + " service=" + searchServiceName);
 
 	if(start != NO_PAGING){
-	    getParams.setProperty(PAGING_START_NUM, Integer.toString(start));
+	    int page = (start / (end - start)) + 1;
+	    getParams.setProperty(PAGING_START_NUM, Integer.toString(page));
 	    getParams.setProperty(PAGING_SIZE, Integer.toString(end-start));
 	    if(sortAscend){
 		getParams.setProperty(PAGING_SORT_ASCEND, "true");
