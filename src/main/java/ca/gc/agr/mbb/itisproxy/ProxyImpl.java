@@ -291,7 +291,7 @@ public class ProxyImpl implements Proxy, ProxyInfo{
 	getParams.setProperty(searchParameterKey, s);
 	
 	LOGGER.info("genericSearch s=" + s + " service=" + searchServiceName);
- 
+  
 	if(start != NO_PAGING){
 	    int page = (start / (end - start)) + 1;
 	    getParams.setProperty(PAGING_START_NUM, Integer.toString(page));
