@@ -10,7 +10,7 @@ import javax.ws.rs.client.WebTarget;
 
 
 public class WSState {
-    public static final String URL_HOST = "http://www.itis.gov";
+    public static final String URL_HOST = "https://www.itis.gov";
 
     public static String USER_AGENT = "ITISProxy: AAFC-Agriculture-Canada-ITIS client: glen.newton@agr.gc.ca";
 
