@@ -30,7 +30,7 @@
     -->
     <repository>
       <id>aafc</id>
-      <url>http://biodiversity.agr.gc.ca:8080/archiva/repository/aafc</url>
+      <url>http://archiva.biodiversity.agr.gc.ca/archiva/repository/aafc</url>
     </repository>
 
     <repository>
@@ -43,7 +43,7 @@
   <distributionManagement>
     <repository>
       <id>aafc</id>
-      <url>http://biodiversity.agr.gc.ca:8080/archiva/repository/aafc</url>
+      <url>http://archiva.biodiversity.agr.gc.ca/archiva/repository/aafc</url>
     </repository>
   </distributionManagement>
 
